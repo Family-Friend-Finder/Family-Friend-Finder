@@ -8,11 +8,19 @@ const styles = {
     fontFamily: "Ranchers",
     fontSize: 20,
   },
+  footer: {
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+  },
 };
 
 function Navbar(props) {
   return (
-    <nav className="navbar navbar-expand-lg fixed-bottom navbar-dark bg-dark">
+    <nav
+      className="navbar navbar-expand-lg navbar-dark bg-dark"
+      style={styles.footer}
+    >
       <div className="container">
         <a className="navbar-brand" style={styles.font}>
           Family Friend Finder
