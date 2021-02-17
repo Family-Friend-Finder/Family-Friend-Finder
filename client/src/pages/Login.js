@@ -15,7 +15,6 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +25,7 @@ class Login extends Component {
       url: `http://localhost:3000/api/login`,
       data: {
         username: username,
-        password: password
+        password: password 
       }
     })
       .then(res => {

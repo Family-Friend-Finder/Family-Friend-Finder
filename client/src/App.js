@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ShowFamilies from "./pages/ShowFamilies";
 import UpdateProfile from "./pages/UpdateProfile";
-import ProtectedRoute from "./components/ProtectedRoute/index";
+//import ProtectedRoute from "./components/ProtectedRoute/index";
 class App extends Component {
   render() {
     return (
@@ -13,9 +13,9 @@ class App extends Component {
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
-              <ProtectedRoute exact={true} path="/" component={ShowFamilies} />
-              <ProtectedRoute path="/settings" component={UpdateProfile} />
-              <ProtectedRoute path="/findfamilies" component={ShowFamilies} />
+              <Route exact={true} path="/" component={Login} />
+              <Route path="/settings" component={UpdateProfile} />
+              <Route path="/findfamilies" component={ShowFamilies} />
             </Switch>
           </BrowserRouter>
       </div>

@@ -4,27 +4,37 @@ import API from "../../utils/API"
 
 class ProtectedRoute extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+           isAuthenticated: false
+        };
+      }
+
+      checkLoginStatus = async () => {
+        const results = await API.isloggedin();
+
+        if (results.data !== 'Not Authorized') {
+            console.log('You are in!');
+           this.setState({isAuthenticated:true});
+        } 
+      }
+     
+       
+      async componentDidMount() {
+        await this.checkLoginStatus();
+      }
+
     render() {
         const Component = this.props.component;
         
-           return (async () => {
-            const results = await API.isloggedin();
-            console.log(results);
-            console.log(results.data.username);
+        if (this.state.isAuthenticated) {
+          return <Component />
+        } else 
+         {
+           return <Redirect to={{ pathname: '/login' }} />
+         }
 
-            if (results.data !== 'Not Authorized') {
-                console.log('You are in!');
-                return true;
-            } else {
-                console.log('Sorry Not Authorised!');
-                return false;
-            }
-        })() ? (
-            <Component />
-        ): (
-            <Redirect to={{ pathname: '/login' }} />
-        );
-            
     }
 }
 
