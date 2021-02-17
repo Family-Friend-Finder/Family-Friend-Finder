@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-<<<<<<< HEAD
 const session = require("express-session");
 const { v4: uuidv4 } = require("uuid");
 const passport = require("passport");
@@ -10,16 +9,6 @@ const cookieParser = require("cookie-parser");
 const User = require("./models/user.js");
 const apiRoutes = require("./routes/apiRoutes");
 const mongoose = require("mongoose");
-=======
-const session = require('express-session');
-const {v4: uuidv4} = require('uuid');
-const passport = require('passport');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const User = require('./models/user.js');
-const apiRoutes = require('./routes/apiRoutes');
-const mongoose = require('mongoose');;
->>>>>>> Develop
 
 //Create Express application
 const app = express();
@@ -48,7 +37,6 @@ app.use(
   session({
     genid: function (req) {
       return uuidv4();
-<<<<<<< HEAD
     },
     secret: "SuperSecretKey",
     resave: false,
@@ -56,16 +44,8 @@ app.use(
     cookie: { maxAge: 60 * 60 * 1000 }, // 60 mins
   })
 );
-=======
-  },
-  secret: 'SuperSecretKey',
-  resave:false,
-  saveUninitialized: true,
-  cookie: {maxAge: 60 * 60 * 1000} // 60 mins
-}));
 app.use(passport.initialize());
 app.use(passport.session());
->>>>>>> Develop
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
