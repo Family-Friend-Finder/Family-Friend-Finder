@@ -12,8 +12,8 @@ function Title(props) {
   return (
     <div className="jumbotron jumbotron-fluid">
       <h1 className="display-4" style={styles.h1}>
-        <i class="fas fa-users"></i> {"..."}Family Friend Finder{"..."}
-        <i class="fas fa-users"></i>
+        <i className="fas fa-users"></i> {"..."}Family Friend Finder{"..."}
+        <i className="fas fa-users"></i>
       </h1>
     </div>
   );

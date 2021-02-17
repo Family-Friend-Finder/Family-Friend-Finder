@@ -42,22 +42,22 @@ function Navbar(props) {
             style={styles.font}
           >
             <li className="nav-item ">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/findfamilies">
                 Find a Family{" "}
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/viewmatches">
                 Matches{" "}
               </a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link " href="#">
+              <a className="nav-link " href="/updateProfile">
                 Profile
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#" style={styles.logout}>
+              <a className="nav-link" href="/api/logout" style={styles.logout}>
                 Logout{"  "} <i className="fas fa-sign-out-alt"></i>
               </a>
             </li>
