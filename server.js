@@ -5,7 +5,7 @@ const session = require('express-session');
 const {v4: uuidv4} = require('uuid');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser'),
+const cookieParser = require('cookie-parser');
 const User = require('./models/user.js');
 const apiRoutes = require('./routes/apiRoutes');
 const mongoose = require('mongoose');;
@@ -37,6 +37,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: {maxAge: 60 * 60 * 1000} // 60 mins
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Main from "./components/Main/index";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import ShowFamilies from "./pages/ShowFamilies";
 import UpdateProfile from "./pages/UpdateProfile";
-import Login from "./components/Login/index"
 import ProtectedRoute from "./components/ProtectedRoute/index";
 class App extends Component {
   render() {
@@ -11,9 +12,10 @@ class App extends Component {
           <BrowserRouter>
             <Switch>
               <Route path="/login" component={Login} />
-              <ProtectedRoute exact={true} path="/" component={Main} />
+              <Route path="/signup" component={Signup} />
+              <ProtectedRoute exact={true} path="/" component={ShowFamilies} />
               <ProtectedRoute path="/settings" component={UpdateProfile} />
-              <ProtectedRoute component={Main} />
+              <ProtectedRoute path="/findfamilies" component={ShowFamilies} />
             </Switch>
           </BrowserRouter>
       </div>

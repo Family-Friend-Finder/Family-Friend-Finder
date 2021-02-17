@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {browserHistory} from 'react-router';
 import $ from 'jquery-ajax';
-import Container from "./components/Container/index.js";
-import Navbar from "./components/Navbar/index";
-import Title from "./components/Title/index";
+import Container from "../components/Container/index"
+import Navbar from "../components/Navbar/index";
+import Title from "../components/Title/index";
 
 class SignUp extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class SignUp extends Component {
     console.log(this.state.username);
     $.ajax({
       method: 'POST',
-      url: `http://localhost:3000/signup`,
+      url: `http://localhost:3000/api/signup`,
       data: {
         username: username,
         password: password
@@ -30,7 +29,6 @@ class SignUp extends Component {
     })
     .then(res => {
       console.log('res is ', res);
-      browserHistory.push('/login');
     }, err => {
       console.log(err);
     });
@@ -61,7 +59,7 @@ class SignUp extends Component {
     value={ this.state.password }
     onChange={this.handlePasswordChange}
     />
-  <Button type='submit' value='signup'>Signup</Button>
+  <button type='submit' value='signup'>Signup</button>
     </form>
     </div>
         </Container>

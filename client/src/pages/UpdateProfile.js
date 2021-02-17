@@ -1,7 +1,7 @@
 import React from 'react';
-import Container from "./components/Container/index.js";
-import Navbar from "./components/Navbar/index";
-import Title from "./components/Title/index";
+import Container from "../components/Container/index.js";
+import Navbar from "../components/Navbar/index";
+import Title from "../components/Title/index";
 
 export default function UpdateProfile(props) {
   return(

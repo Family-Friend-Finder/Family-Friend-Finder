@@ -3,22 +3,32 @@ const User = require("../models/user")
 const passport = require("passport");
 
 
-router.post('/signup', function signup(req, res) {
+router.post('/api/signup', function (req, res) {
   console.log(`${req.body.username} ${req.body.password}`);
   User.register(new User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
-      passport.authenticate('local')(req, res, function() {
+      passport.authenticate('local')(req, res, function () {
         res.send(newUser);
       });
     }
-  )});
+  )
+});
 
-router.post('/login', passport.authenticate('local'), function (req, res) {
+router.get('/api/isauthenticated', function (req, res) {
+  console.log(req.user);
+  // passport adds this to the request object
+  if (req.isAuthenticated()) {
+    res.send(req.user);
+  } else
+     res.send("Not Authorized");
+});
+
+router.post('/api/login', passport.authenticate('local'), function (req, res) {
   console.log(JSON.stringify(req.user));
   res.send(req.user);
 });
 
-router.get('/logout', function (req, res) {
+router.get('/api/logout', function (req, res) {
   console.log("BEFORE logout", req);
   req.logout();
   res.send(req);
