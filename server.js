@@ -1,16 +1,6 @@
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-<<<<<<< HEAD
-const session = require("express-session");
-const { v4: uuidv4 } = require("uuid");
-const passport = require("passport");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const User = require("./models/user.js");
-const apiRoutes = require("./routes/apiRoutes");
-const mongoose = require("mongoose");
-=======
 const session = require('express-session');
 const {v4: uuidv4} = require('uuid');
 const passport = require('passport');
@@ -19,7 +9,6 @@ const cookieParser = require('cookie-parser');
 const User = require('./models/user.js');
 const apiRoutes = require('./routes/apiRoutes');
 const mongoose = require('mongoose');;
->>>>>>> Develop
 
 //Create Express application
 const app = express();
