@@ -1,0 +1,50 @@
+.card-btn {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  border: none;
+  bottom: 10px;
+  color: #FFF;
+  font-size: 24px;
+  cursor: pointer;
+  font-family: FontAwesome;
+  outline: none;
+}
+
+.pass {
+  left: 2%;
+  background: #E53935;
+}
+
+.pass::after {
+  content: "\f057";
+}
+
+.pick {
+  right: 2%;
+  background: #43A047;
+}
+
+.pick::after {
+  content: "\f7cd";
+}
+
+.pick:hover::after, .pass:hover::after {
+  animation: iconBounce .57s 1;
+}
+
+@keyframes iconBounce {
+  0% {
+    font-size: 24px;
+  }
+  
+   50% {
+    font-size: 28px;
+  }
+  
+  100% {
+    font-size: 24px;
+  }
+
+}

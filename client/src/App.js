@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ShowFamilies from "./pages/ShowFamilies";
 import UpdateProfile from "./pages/UpdateProfile";
+// import Match from "./pages/Matches";
 //import ProtectedRoute from "./components/ProtectedRoute/index";
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
             <Route exact={true} path="/" component={Login} />
             <Route path="/settings" component={UpdateProfile} />
             <Route path="/findfamilies" component={ShowFamilies} />
+            {/* <Route path="/matches" component={Match} /> */}
           </Switch>
         </BrowserRouter>
       </div>
