@@ -5,6 +5,7 @@ import Container from "../components/Container/index.js";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import { Redirect } from "react-router-dom";
+import Wrapper from "../components/Wrapper/index";
 
 class Login extends Component {
   constructor(props) {
@@ -58,33 +59,37 @@ class Login extends Component {
     if (this.state.isAuthenticated === false) {
       console.log("user is not logged in");
       return (
-        <Container>
+        <div>
           <Title />
+          <Container>
+            <Wrapper>
+              <div>
+                <h1>Welcome to Family Finder!</h1>
+                <form onSubmit={this.handleSubmit}>
+                  <input
+                    type="text"
+                    placeholder="username"
+                    value={this.state.username}
+                    onChange={this.handleUsernameChange}
+                  />
+                  <input
+                    type="password"
+                    placeholder="password"
+                    value={this.state.password}
+                    onChange={this.handlePasswordChange}
+                  />
+                  <button type="submit" value="login">
+                    Login
+                  </button>
+                </form>
+                <Link role="button" to="signup">
+                  Signup
+                </Link>
+              </div>
+            </Wrapper>
+          </Container>
           <Navbar />
-          <div>
-            <h1>Welcome to Family Finder!</h1>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                placeholder="username"
-                value={this.state.username}
-                onChange={this.handleUsernameChange}
-              />
-              <input
-                type="password"
-                placeholder="password"
-                value={this.state.password}
-                onChange={this.handlePasswordChange}
-              />
-              <button type="submit" value="login">
-                Login
-              </button>
-            </form>
-            <Link role="button" to="signup">
-              Signup
-            </Link>
-          </div>
-        </Container>
+        </div>
       );
     } else {
       console.log("user is already logged in");
