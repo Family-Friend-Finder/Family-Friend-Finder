@@ -1,14 +1,38 @@
 const router = require("express").Router();
-const db = require("../models");
+const User = require("../models/user")
+const passport = require("passport");
 
-router.get("/recipes", (req, res) => {
-  // Use a regular expression to search titles for req.query.q
-  // using case insensitive match. https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
-  db.Recipe.find({
-    title: { $regex: new RegExp(req.query.q, 'i')}
-  })
-    .then(recipes => res.json(recipes))
-    .catch(err => res.status(422).end());
+
+router.post('/api/signup', function (req, res) {
+  console.log(`${req.body.username} ${req.body.password}`);
+  User.register(new User({ username: req.body.username }), req.body.password,
+    function (err, newUser) {
+      passport.authenticate('local')(req, res, function () {
+        res.send(newUser);
+      });
+    }
+  )
+});
+
+router.get('/api/isauthenticated', function (req, res) {
+  console.log(req.user);
+  // passport adds this to the request object
+  if (req.isAuthenticated()) {
+    res.send(req.user);
+  } else
+     res.send("Not Authorized");
+});
+
+router.post('/api/login', passport.authenticate('local'), function (req, res) {
+  console.log(JSON.stringify(req.user));
+  res.send(req.user);
+});
+
+router.get('/api/logout', function (req, res) {
+  console.log("BEFORE logout", req);
+  req.logout();
+  res.send(req);
+  console.log("AFTER logout", req);
 });
 
 module.exports = router;

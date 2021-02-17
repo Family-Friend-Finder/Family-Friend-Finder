@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link, useLocation } from "react-router-dom";
+
 const styles = {
   logout: {
     color: "red",
@@ -8,19 +8,11 @@ const styles = {
     fontFamily: "Ranchers",
     fontSize: 20,
   },
-  footer: {
-    position: "fixed",
-    bottom: 0,
-    width: "100%",
-  },
 };
 
 function Navbar(props) {
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark"
-      style={styles.footer}
-    >
+    <nav className="navbar navbar-expand-lg fixed-bottom navbar-dark bg-dark">
       <div className="container">
         <a className="navbar-brand" style={styles.font}>
           Family Friend Finder
@@ -42,22 +34,22 @@ function Navbar(props) {
             style={styles.font}
           >
             <li className="nav-item ">
-              <a className="nav-link" href="/findfamilies">
+              <a className="nav-link" href="#">
                 Find a Family{" "}
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/viewmatches">
+              <a className="nav-link" href="#">
                 Matches{" "}
               </a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link " href="/updateProfile">
+              <a className="nav-link " href="#">
                 Profile
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/api/logout" style={styles.logout}>
+              <a className="nav-link" href="#" style={styles.logout}>
                 Logout{"  "} <i className="fas fa-sign-out-alt"></i>
               </a>
             </li>
@@ -69,36 +61,3 @@ function Navbar(props) {
 }
 
 export default Navbar;
-
-// This will need to be swapped out for the list items once routes are set.
-
-// <li className="nav-item">
-// <Link to="/" className={location.pathname === "/" ? "nav-link active" : "nav-link"}>
-// Find a Family{" "}
-// </Link>
-// </li>
-// <li className="nav-item">
-// <Link
-//   to="/about"
-//   className={location.pathname === "/matches" ? "nav-link active" : "nav-link"}
-// >
-//   Matches{" "}
-// </Link>
-// </li>
-// <li className="nav-item">
-// <Link
-//   to="/blog"
-//   className={location.pathname === "/profile" ? "nav-link active" : "nav-link"}
-// >
-//   Profile{" "}
-// </Link>
-// </li>
-// <li className="nav-item">
-// <Link
-//   to="/contact"
-//   className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}
-//   style={styles.logout}
-// >
-//   Logout{"  "} <i className="fas fa-sign-out-alt"></i>
-// </Link>
-// </li>
