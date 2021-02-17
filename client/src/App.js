@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar/index";
 import Title from "./components/Title/index";
 import Card from "./components/Card/index";
 import Wrapper from "./components/Wrapper/index";
+// import ImageUploader from "./components/ImageUploader/index";
+
 class App extends Component {
   render() {
     return (
