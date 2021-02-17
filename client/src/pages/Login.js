@@ -63,29 +63,57 @@ class Login extends Component {
           <Title />
           <Container>
             <Wrapper>
-              <div>
-                <h1>Welcome to Family Finder!</h1>
-                <form onSubmit={this.handleSubmit}>
-                  <input
-                    type="text"
-                    placeholder="username"
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange}
-                  />
-                  <input
-                    type="password"
-                    placeholder="password"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange}
-                  />
-                  <button type="submit" value="login">
-                    Login
-                  </button>
-                </form>
-                <Link role="button" to="signup">
-                  Signup
-                </Link>
-              </div>
+              <center>
+                <div>
+                  <div className="container">
+                    <div className="row" />
+                    <div className="col-sm-1"></div>
+                    <div className="col-sm-10">
+                      <h1>Welcome to Family Finder!</h1>
+                      <br />
+                      <div className="card">
+                        <div className="card-body">
+                          <form>
+                            <h2 className="title">Login</h2>
+                            <hr />
+
+                            <div className="form-group">
+                              <label for="InputName">Name</label>
+                              <br />
+                              <input
+                                type="text"
+                                placeholder="username"
+                                value={this.state.username}
+                                onChange={this.handleUsernameChange}
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label for="InputEmail">Password</label>
+                              <br />
+                              <input
+                                type="password"
+                                placeholder="password"
+                                value={this.state.password}
+                                onChange={this.handlePasswordChange}
+                              />
+                            </div>
+                            <button
+                              onClick={this.handleSubmit}
+                              type="submit"
+                              className="btn btn-info"
+                            >
+                              Submit
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                      <Link role="button" to="signup">
+                        Sign-up
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </center>
             </Wrapper>
           </Container>
           <Navbar />

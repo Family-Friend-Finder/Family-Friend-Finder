@@ -19,32 +19,26 @@ function Form() {
                   <div className="form-group">
                     <label for="InputName">Name</label>
                     <input
-                      type="name"
-                      className="form-control"
-                      id="InputName"
-                      placeholder="John Smith"
+                      type="text"
+                      placeholder="username"
+                      value={this.state.username}
+                      onChange={this.handleUsernameChange}
                     />
                   </div>
                   <div className="form-group">
-                    <label for="InputEmail">Contact</label>
+                    <label for="InputEmail">Password</label>
                     <input
-                      type="email"
-                      className="form-control"
-                      id="InputEmail"
-                      placeholder="425-856-6587"
+                      type="password"
+                      placeholder="password"
+                      value={this.state.password}
+                      onChange={this.handlePasswordChange}
                     />
                   </div>
-                  <div className="form-group">
-                    <label for="InputMessage">About Me</label>
-                    <textarea
-                      className="form-control"
-                      id="message"
-                      name="message"
-                      placeholder="I like to read, I like to code"
-                      rows="5"
-                    ></textarea>
-                  </div>
-                  <button type="submit" className="btn btn-info col-sm-4">
+                  <button
+                    onClick={this.handleSubmit}
+                    type="submit"
+                    className="btn btn-info col-sm-4"
+                  >
                     Submit
                   </button>
                 </form>
