@@ -24,7 +24,6 @@ class Match extends Component {
           <Wrapper>
             {this.state.friends.map((friend) => (
               <Card
-                removeMatch={this.removeMatch}
                 id={match.id}
                 key={match.id}
                 name={match.name}
