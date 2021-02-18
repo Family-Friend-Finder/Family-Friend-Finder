@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ShowFamilies from "./pages/ShowFamilies";
 import UpdateProfile from "./pages/UpdateProfile";
+// import Match from "./pages/Matches";
 //import ProtectedRoute from "./components/ProtectedRoute/index";
 
 export const AuthContext = React.createContext();
@@ -44,6 +45,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Switch>
+
             <Route path="/login">
              <Login />
             </Route>
@@ -59,6 +61,7 @@ function App() {
             <Route path="/findfamilies">
              <ShowFamilies loginstatus={state.isloggedin}/>
             </Route>
+
           </Switch>
         </BrowserRouter>
       </div>
