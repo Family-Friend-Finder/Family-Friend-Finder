@@ -3,22 +3,15 @@ const db = require("../models");
 
 // This file adds seed data for the family finder app
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/familyfriendfinder");
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/familyfriendfinder"
+);
 
 // const userSeed = [
 //   {
-//     thumbnail: "http://img.recipepuppy.com/34541.jpg",
-//     href:
-//       "http://www.recipezaar.com/EAZY-PEEZY-PIZZA-DOUGH-Bread-Machine-Pizza-Dough-35805",
-//     ingredients: [
-//       "bread flour",
-//       "yeast",
-//       "olive oil",
-//       "salt",
-//       "sugar",
-//       "water",
-//     ],
-//     title: "Easy Peezy Pizza Dough (Bread Machine Pizza Dough) ",
+//     firstName: "Michael",
+//     lasName: "O'brien",
+//     phoneNumber: 555 - 555 - 5555,
 //   },
 // ];
 
