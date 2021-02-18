@@ -6,22 +6,65 @@ import Signup from "./pages/Signup";
 import ShowFamilies from "./pages/ShowFamilies";
 import UpdateProfile from "./pages/UpdateProfile";
 //import ProtectedRoute from "./components/ProtectedRoute/index";
-class App extends Component {
-  render() {
+
+export const AuthContext = React.createContext();
+
+const initialState = {
+  isloggedin: false,
+  userid: null
+};
+
+const reducer = (state, action) => {
+  console.log("Entering reducer function");
+  console.log(JSON.stringify(action));
+  console.log(JSON.stringify(state));
+  switch (action.type) {
+    case "LOGIN":
+      console.log(`userid in reducer function is ${action.payload.userid} ` )
+      return {
+        ...state,
+        isloggedin: true,
+        userid: action.payload.userid,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        isloggedin: false,
+        userid: null
+      };
+    default:
+      return state;
+  }
+}
+
+function App() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
     return (
+      <AuthContext.Provider value={{state,dispatch}}>
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact={true} path="/" component={Login} />
-            <Route path="/settings" component={UpdateProfile} />
-            <Route path="/findfamilies" component={ShowFamilies} />
+            <Route path="/login">
+             <Login />
+            </Route>
+            <Route path="/signup" >
+             <Signup />
+            </Route> 
+            <Route exact={true} path="/">
+            <Login />
+            </Route>
+            <Route path="/updateProfile">
+            <UpdateProfile />
+            </Route>
+            <Route path="/findfamilies">
+             <ShowFamilies loginstatus={state.isloggedin}/>
+            </Route>
           </Switch>
         </BrowserRouter>
       </div>
+      </AuthContext.Provider>
     );
   }
-}
+
 
 export default App;
