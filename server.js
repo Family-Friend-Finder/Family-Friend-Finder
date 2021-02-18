@@ -37,15 +37,6 @@ app.use(
   session({
     genid: function (req) {
       return uuidv4();
-<<<<<<< HEAD
-    },
-    secret: "SuperSecretKey",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }, // 60 mins
-  })
-);
-=======
   },
   secret: 'SuperSecretKey',
   resave:false,
@@ -54,7 +45,6 @@ app.use(
 }));
 app.use(passport.initialize());
 app.use(passport.session());
->>>>>>> Develop
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
