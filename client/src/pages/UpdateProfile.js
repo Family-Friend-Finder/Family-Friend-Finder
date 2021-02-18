@@ -5,14 +5,14 @@ import Title from "../components/Title/index";
 
 import Wrapper from "../components/Wrapper/index";
 import Form from "../components/Form/index";
-
+import ImageUploader from "../components/ImageUploader/index";
 export default function UpdateProfile(props) {
   return (
     <div>
       <Title />
       <Container>
         <Wrapper>
-          <Form />
+          <ImageUploader />
         </Wrapper>
       </Container>
       <Navbar />

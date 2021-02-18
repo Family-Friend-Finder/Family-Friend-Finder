@@ -1,33 +1,58 @@
 import React from "react";
 import ImageUploader from "react-images-upload";
+import { Redirect } from "react-router-dom";
 
-class App extends React.Component {
+class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = { pictures: [] };
     this.onDrop = this.onDrop.bind(this);
   }
 
-  onDrop(pictureFiles, pictureDataURLs) {
+  onDrop1(pictureFiles, pictureDataURLs) {
+    console.log(pictureFiles);
     this.setState({
       pictures: pictureFiles,
       //   pictures: this.state.pictures.concat(pictureFiles)
     });
   }
+  onDrop(pictureFiles) {
+    let reader = new FileReader();
 
+    reader.onloadend = () => {
+      this.setState({
+        picture: reader.result,
+      });
+    };
+
+    reader.readAsDataURL(pictureFiles[0]);
+  }
   render() {
     return (
-      <ImageUploader
-        withIcon={true}
-        buttonText="Choose images"
-        onChange={this.onDrop}
-        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-        maxFileSize={5242880}
-      />
+      <div>
+        <ImageUploader
+          withIcon={true}
+          buttonText="Choose images"
+          onChange={this.onDrop}
+          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          maxFileSize={5242880}
+        />
+        <div>
+          <img
+            src={this.state.picture}
+            alt="pictureTest"
+            width="200px"
+            height="200px"
+          />
+          {/* {this.state.pictures.map((picture) => (
+            <img src={picture} />
+          ))} */}
+        </div>
+      </div>
     );
   }
 }
-export default App;
+export default ImageUpload;
 
 //  this will use hooks
 

@@ -12,7 +12,7 @@ export const AuthContext = React.createContext();
 
 const initialState = {
   isloggedin: false,
-  userid: null
+  userid: null,
 };
 
 const reducer = (state, action) => {
@@ -21,7 +21,7 @@ const reducer = (state, action) => {
   console.log(JSON.stringify(state));
   switch (action.type) {
     case "LOGIN":
-      console.log(`userid in reducer function is ${action.payload.userid} ` )
+      console.log(`userid in reducer function is ${action.payload.userid} `);
       return {
         ...state,
         isloggedin: true,
@@ -31,43 +31,41 @@ const reducer = (state, action) => {
       return {
         ...state,
         isloggedin: false,
-        userid: null
+        userid: null,
       };
     default:
       return state;
   }
-}
+};
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-    return (
-      <AuthContext.Provider value={{state,dispatch}}>
+  return (
+    <AuthContext.Provider value={{ state, dispatch }}>
       <div className="App">
         <BrowserRouter>
           <Switch>
-
+            {/* app routes */}
             <Route path="/login">
-             <Login />
+              <Login />
             </Route>
-            <Route path="/signup" >
-             <Signup />
-            </Route> 
+            <Route path="/signup">
+              <Signup />
+            </Route>
             <Route exact={true} path="/">
-            <Login />
+              <Login />
             </Route>
             <Route path="/updateProfile">
-            <UpdateProfile />
+              <UpdateProfile />
             </Route>
             <Route path="/findfamilies">
-             <ShowFamilies loginstatus={state.isloggedin}/>
+              <ShowFamilies loginstatus={state.isloggedin} />
             </Route>
-
           </Switch>
         </BrowserRouter>
       </div>
-      </AuthContext.Provider>
-    );
-  }
-
+    </AuthContext.Provider>
+  );
+}
 
 export default App;
