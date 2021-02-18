@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery-ajax";
+import { Redirect } from "react-router-dom";
 import Container from "../components/Container/index";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
@@ -12,6 +13,7 @@ class SignUp extends Component {
     this.state = {
       username: "",
       password: "",
+      redirect:null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -24,7 +26,7 @@ class SignUp extends Component {
     console.log(this.state.username);
     $.ajax({
       method: "POST",
-      url: `http://localhost:3000/api/signup`,
+      url: `/api/signup`,
       data: {
         username: username,
         password: password,
@@ -32,6 +34,7 @@ class SignUp extends Component {
     }).then(
       (res) => {
         console.log("res is ", res);
+        this.setState({redirect:"/login"})
       },
       (err) => {
         console.log(err);
@@ -45,6 +48,7 @@ class SignUp extends Component {
     this.setState({ password: e.target.value });
   }
   render() {
+    if (!this.state.redirect) {
     return (
       <div>
         <Title />
@@ -106,6 +110,9 @@ class SignUp extends Component {
         <Navbar />
       </div>
     );
+    } else {
+      return <Redirect to={this.state.redirect} />
+    }
   }
 }
 

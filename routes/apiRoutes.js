@@ -28,6 +28,20 @@ router.post('/api/login', passport.authenticate('local'), function (req, res) {
   res.send(req.user);
 });
 
+// router.post('/api/login', function (req, res) {
+//   console.log(req.body);
+// });
+// router.get('/api/login', function(req, res, next) {
+//   passport.authenticate('local', function(err, user, info) {
+//     if (err) { res.send(next(err)); }
+//     if (!user) { res.send("incorrect username or password"); }
+//     req.logIn(user, function(err) {
+//       if (err) { res.send(next(err)); }
+//       return res.send(user);
+//     });
+//   })(req, res, next);
+// });
+
 router.get('/api/logout', function (req, res) {
   console.log("BEFORE logout", req);
   req.logout();

@@ -25,7 +25,7 @@ mongoose.connect(
 //to config API to use body body-parser and look for JSON in req.body
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   })
 );
 app.use(bodyParser.json());
@@ -37,13 +37,14 @@ app.use(
   session({
     genid: function (req) {
       return uuidv4();
-    },
-    secret: "SuperSecretKey",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 }, // 60 mins
-  })
-);
+
+  },
+  secret: 'SuperSecretKey',
+  resave:false,
+  saveUninitialized: true,
+  cookie: {maxAge: 60 * 60 * 1000} // 60 mins
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
