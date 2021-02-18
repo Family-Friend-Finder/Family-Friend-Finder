@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import $ from "jquery-ajax";
+import { Redirect } from "react-router-dom";
 import Container from "../components/Container/index";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
@@ -11,6 +13,7 @@ class SignUp extends Component {
     this.state = {
       username: "",
       password: "",
+      redirect:null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -23,7 +26,7 @@ class SignUp extends Component {
     console.log(this.state.username);
     $.ajax({
       method: "POST",
-      url: `http://localhost:3000/api/signup`,
+      url: `/api/signup`,
       data: {
         username: username,
         password: password,
@@ -31,6 +34,7 @@ class SignUp extends Component {
     }).then(
       (res) => {
         console.log("res is ", res);
+        this.setState({redirect:"/login"})
       },
       (err) => {
         console.log(err);
@@ -44,36 +48,71 @@ class SignUp extends Component {
     this.setState({ password: e.target.value });
   }
   render() {
+    if (!this.state.redirect) {
     return (
       <div>
         <Title />
         <Container>
           <Wrapper>
-            <div>
-              <h2>Signup</h2>
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  type="text"
-                  placeholder="username"
-                  value={this.state.username}
-                  onChange={this.handleUsernameChange}
-                />
-                <input
-                  type="password"
-                  placeholder="password"
-                  value={this.state.password}
-                  onChange={this.handlePasswordChange}
-                />
-                <button type="submit" value="signup">
-                  Signup
-                </button>
-              </form>
-            </div>
+            <center>
+              <div>
+                <div className="container">
+                  <div className="row" />
+                  <div className="col-sm-1"></div>
+                  <div className="col-sm-10">
+                    <h1>Welcome to Family Finder!</h1>
+                    <br />
+                    <div className="card">
+                      <div className="card-body">
+                        <form>
+                          <h2 className="title">Sign-up</h2>
+                          <hr />
+
+                          <div className="form-group">
+                            <label for="InputName">Name</label>
+                            <br />
+                            <input
+                              type="text"
+                              placeholder="username"
+                              value={this.state.username}
+                              onChange={this.handleUsernameChange}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label for="InputEmail">Password</label>
+                            <br />
+                            <input
+                              type="password"
+                              placeholder="password"
+                              value={this.state.password}
+                              onChange={this.handlePasswordChange}
+                            />
+                          </div>
+                          <button
+                            onClick={this.handleSubmit}
+                            type="submit"
+                            className="btn btn-info"
+                          >
+                            Sign-up
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                    <Link role="button" to="/">
+                      Login
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </center>
           </Wrapper>
         </Container>
         <Navbar />
       </div>
     );
+    } else {
+      return <Redirect to={this.state.redirect} />
+    }
   }
 }
 
