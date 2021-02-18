@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
+import $ from "jquery-ajax";
+import { Redirect } from "react-router-dom";
 // import { Link, useLocation } from "react-router-dom";
 const styles = {
   logout: {
@@ -16,6 +18,29 @@ const styles = {
 };
 
 function Navbar(props) {
+
+  const [redirect, setRedirect] = useState(null);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+
+    $.ajax({
+      method: "GET",
+      url: `/api/logout`
+    }).then(
+      (res) => {
+        console.log("res is ", res);
+        sessionStorage.removeItem("sessionID");
+        setRedirect("/login")
+      },
+      (err) => {
+        console.log("oops!");
+        console.log(err);
+      }
+    );
+  }
+
+  if (!redirect) {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -57,7 +82,7 @@ function Navbar(props) {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/api/logout" style={styles.logout}>
+              <a className="nav-link" href="#" style={styles.logout} onClick={handleLogout}>
                 Logout{"  "} <i className="fas fa-sign-out-alt"></i>
               </a>
             </li>
@@ -66,6 +91,9 @@ function Navbar(props) {
       </div>
     </nav>
   );
+  } else {
+    return <Redirect to={redirect} />
+  }
 }
 
 export default Navbar;

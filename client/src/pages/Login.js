@@ -1,26 +1,25 @@
-//import React, { Component, useState } from "react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery-ajax";
 import Container from "../components/Container/index.js";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/index";
-import API from "../utils/API";
-import { AuthContext } from "../App";
+//import { AuthContext } from "../App";
 
 export default function Login() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [authStatus, setauthStatus] = useState();
+  //const [authStatus, setauthStatus] = useState();
+  const [redirect, setRedirect] = useState(null);
 
-  const { dispatch } = React.useContext(AuthContext);
+  //const { dispatch } = React.useContext(AuthContext);
 
-  const [loginState, setLoginState] = useState({
-    isloggedin: false,
-    userid: "",
-  });
+  // const [loginState, setLoginState] = useState({
+  //   isloggedin: false,
+  //   userid: "",
+  // });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,11 +35,13 @@ export default function Login() {
     }).then(
       (res) => {
         console.log("res is ", res);
-        dispatch({
-          type: "LOGIN",
-          payload: { userid: res._id },
-        });
-        setauthStatus(true);
+        sessionStorage.setItem("sessionID",res);
+        // dispatch({
+        //   type: "LOGIN",
+        //   payload: { userid: res._id },
+        // });
+        //setauthStatus(true);
+        setRedirect("/findfamilies");
       },
       (err) => {
         console.log("oops!");
@@ -48,12 +49,11 @@ export default function Login() {
       }
     );
   };
-
-  console.log(`Auth Status is ${authStatus}`);
+  //console.log(`Auth Status is ${authStatus}`);
   //console.log(`${loginState}`);
 
+  if (!redirect) {
   return (
-    <AuthContext.Provider value={loginState}>
       <div>
         <Title />
         <Container>
@@ -78,8 +78,8 @@ export default function Login() {
                             <input
                               type="text"
                               placeholder="username"
-                              value={this.state.username}
-                              onChange={this.handleUsernameChange}
+                              value={username}
+                              onChange={e => setUsername(e.target.value)}
                             />
                           </div>
                           <div className="form-group">
@@ -88,12 +88,12 @@ export default function Login() {
                             <input
                               type="password"
                               placeholder="password"
-                              value={this.state.password}
-                              onChange={this.handlePasswordChange}
+                              value={password}
+                              onChange={e => setPassword(e.target.value)}
                             />
                           </div>
                           <button
-                            onClick={this.handleSubmit}
+                            onClick={handleSubmit}
                             type="submit"
                             className="btn btn-info"
                           >
@@ -113,6 +113,8 @@ export default function Login() {
         </Container>
         <Navbar />
       </div>
-    </AuthContext.Provider>
-  );
+  )
+ } else {
+  return <Redirect to={redirect} />
+  }
 }
