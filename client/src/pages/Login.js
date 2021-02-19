@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import { Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/index";
+
 //import { AuthContext } from "../App";
 
 export default function Login() {
@@ -21,10 +22,11 @@ export default function Login() {
   //   userid: "",
   // });
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Username: ${username} Password: ${password}`);
-
     $.ajax({
       method: "POST",
       url: `/api/login`,
@@ -102,10 +104,10 @@ export default function Login() {
                         </form>
                       </div>
                     </div>
-                    <Link role="button" to="signup">
-                      Sign-up
-                    </Link>
                   </div>
+                  <Link role="button" to="signup">
+                    Sign-up
+                  </Link>
                 </div>
               </div>
             </center>
