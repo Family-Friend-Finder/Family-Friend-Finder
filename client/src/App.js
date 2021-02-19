@@ -39,35 +39,34 @@ import UpdateProfile from "./pages/UpdateProfile";
 // }
 
 function App() {
- //const [state, dispatch] = React.useReducer(reducer, initialState);
-   //console.log(`Logged in State ${state.isloggedin}`);
+  //const [state, dispatch] = React.useReducer(reducer, initialState);
+  //console.log(`Logged in State ${state.isloggedin}`);
   // console.log(`userid: ${state.userid}`);
-    return (
-      //<AuthContext.Provider value={{state,dispatch}}>
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route path="/login">
-             <Login />
-            </Route>
-            <Route path="/signup" >
-             <Signup />
-            </Route> 
-            <Route exact={true} path="/">
+  return (
+    //<AuthContext.Provider value={{state,dispatch}}>
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login">
             <Login />
-            </Route>
-            <Route path="/updateProfile">
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route exact={true} path="/">
+            <Login />
+          </Route>
+          <Route path="/updateProfile">
             <UpdateProfile />
-            </Route>
-            <Route path="/findfamilies">
-             <ShowFamilies />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </div>
-      //</AuthContext.Provider>
-    );
-  }
-
+          </Route>
+          <Route path="/findfamilies">
+            <ShowFamilies />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
+    //</AuthContext.Provider>
+  );
+}
 
 export default App;
