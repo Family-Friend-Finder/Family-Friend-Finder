@@ -1,21 +1,72 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import ShowFamilies from "./pages/ShowFamilies";
+import UpdateProfile from "./pages/UpdateProfile";
+// import Match from "./pages/Matches";
+//import ProtectedRoute from "./components/ProtectedRoute/index";
+
+// const initialState = {
+//   isloggedin: false,
+//   userid: null
+// };
+
+// export const AuthContext = React.createContext(initialState);
+
+// const reducer = (state, action) => {
+//   console.log("Entering reducer function");
+//   console.log(JSON.stringify(action));
+//   console.log(JSON.stringify(state));
+//   switch (action.type) {
+//     case "LOGIN":
+//       console.log(`userid in reducer function is ${action.payload.userid} ` )
+//       return {
+//         ...state,
+//         isloggedin: true,
+//         userid: action.payload.userid,
+//       };
+//     case "LOGOUT":
+//       return {
+//         ...state,
+//         isloggedin: false,
+//         userid: null
+//       };
+//     default:
+//       return state;
+//   }
+// }
+
+function App() {
+  //const [state, dispatch] = React.useReducer(reducer, initialState);
+  //console.log(`Logged in State ${state.isloggedin}`);
+  // console.log(`userid: ${state.userid}`);
+  return (
+    //<AuthContext.Provider value={{state,dispatch}}>
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route exact={true} path="/">
+            <Login />
+          </Route>
+          <Route path="/updateProfile">
+            <UpdateProfile />
+          </Route>
+          <Route path="/findfamilies">
+            <ShowFamilies />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
+    //</AuthContext.Provider>
+  );
 }
 
 export default App;
