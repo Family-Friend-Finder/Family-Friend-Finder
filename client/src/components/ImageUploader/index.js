@@ -59,7 +59,7 @@ export default ImageUpload;
 // import React, { useState } from "react";
 // import ImageUploader from "react-images-upload";
 
-// const App = props => {
+// const ImageUpload = props => {
 //   const [pictures, setPictures] = useState([]);
 
 //   const onDrop = picture => {
@@ -76,4 +76,4 @@ export default ImageUpload;
 //   );
 // };
 
-// export default App;
+// export default ImageUpload;
