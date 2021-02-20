@@ -24,15 +24,14 @@ router.get('/api/isauthenticated', function (req, res) {
 });
 
 router.post('/api/login', passport.authenticate('local'), function (req, res) {
-  console.log(JSON.stringify(req.user));
-  res.send(req.user);
+  console.log(JSON.stringify(req.sessionID));
+  res.send(req.sessionID);
 });
 
+
 router.get('/api/logout', function (req, res) {
-  console.log("BEFORE logout", req);
   req.logout();
-  res.send(req);
-  console.log("AFTER logout", req);
+  res.send("Logout successful");
 });
 
 module.exports = router;

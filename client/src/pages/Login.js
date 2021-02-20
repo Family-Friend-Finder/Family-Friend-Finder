@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery-ajax";
 import Container from "../components/Container/index.js";
@@ -7,26 +7,29 @@ import Title from "../components/Title/index";
 import { Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/index";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      id: "",
-      isAuthenticated: false,
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-  }
-  handleSubmit(e) {
+//import { AuthContext } from "../App";
+
+export default function Login() {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  //const [authStatus, setauthStatus] = useState();
+  const [redirect, setRedirect] = useState(null);
+
+  //const { dispatch } = React.useContext(AuthContext);
+
+  // const [loginState, setLoginState] = useState({
+  //   isloggedin: false,
+  //   userid: "",
+  // });
+
+
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let username = this.state.username;
-    let password = this.state.password;
+    console.log(`Username: ${username} Password: ${password}`);
     $.ajax({
       method: "POST",
-      url: `http://localhost:3000/api/login`,
+      url: `/api/login`,
       data: {
         username: username,
         password: password,
@@ -34,68 +37,86 @@ class Login extends Component {
     }).then(
       (res) => {
         console.log("res is ", res);
-        this.setState({ isAuthenticated: true, id: res._id });
+        sessionStorage.setItem("sessionID",res);
+        // dispatch({
+        //   type: "LOGIN",
+        //   payload: { userid: res._id },
+        // });
+        //setauthStatus(true);
+        setRedirect("/findfamilies");
       },
       (err) => {
         console.log("oops!");
         console.log(err);
       }
     );
-  }
+  };
+  //console.log(`Auth Status is ${authStatus}`);
+  //console.log(`${loginState}`);
 
-  handleUsernameChange(e) {
-    this.setState({ username: e.target.value });
-  }
-  handlePasswordChange(e) {
-    this.setState({ password: e.target.value });
-  }
-  getInitialState() {
-    return {
-      isAuthenticated: false,
-    };
-  }
-
-  render() {
-    if (this.state.isAuthenticated === false) {
-      console.log("user is not logged in");
-      return (
-        <div>
-          <Title />
-          <Container>
-            <Wrapper>
+  if (!redirect) {
+  return (
+      <div>
+        <Title />
+        <Container>
+          <Wrapper>
+            <center>
               <div>
-                <h1>Welcome to Family Finder!</h1>
-                <form onSubmit={this.handleSubmit}>
-                  <input
-                    type="text"
-                    placeholder="username"
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange}
-                  />
-                  <input
-                    type="password"
-                    placeholder="password"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange}
-                  />
-                  <button type="submit" value="login">
-                    Login
-                  </button>
-                </form>
-                <Link role="button" to="signup">
-                  Signup
-                </Link>
+                <div className="container">
+                  <div className="row" />
+                  <div className="col-sm-1"></div>
+                  <div className="col-sm-10">
+                    <h1>Welcome to Family Finder!</h1>
+                    <br />
+                    <div className="card">
+                      <div className="card-body">
+                        <form>
+                          <h2 className="title">Login</h2>
+                          <hr />
+
+                          <div className="form-group">
+                            <label for="InputName">Name</label>
+                            <br />
+                            <input
+                              type="text"
+                              placeholder="username"
+                              value={username}
+                              onChange={e => setUsername(e.target.value)}
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label for="InputEmail">Password</label>
+                            <br />
+                            <input
+                              type="password"
+                              placeholder="password"
+                              value={password}
+                              onChange={e => setPassword(e.target.value)}
+                            />
+                          </div>
+                          <button
+                            onClick={handleSubmit}
+                            type="submit"
+                            className="btn btn-info"
+                          >
+                            Login
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <Link role="button" to="signup">
+                    Sign-up
+                  </Link>
+                </div>
               </div>
-            </Wrapper>
-          </Container>
-          <Navbar />
-        </div>
-      );
-    } else {
-      console.log("user is already logged in");
-      return <Redirect to={{ pathname: "/findfamilies" }} />;
-    }
+            </center>
+          </Wrapper>
+        </Container>
+        <Navbar />
+      </div>
+  )
+ } else {
+  return <Redirect to={redirect} />
   }
 }
-
-export default Login;

@@ -2,20 +2,24 @@ import React from "react";
 import Container from "../components/Container/index";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
-import ImageUploader from "../components/ImageUploader/index";
+import { Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/index";
-
+import Form from "../components/Form/index";
+// import ImageUploader from "../components/ImageUploader/index";
 export default function UpdateProfile(props) {
-  return (
+  const isloggedin = sessionStorage.getItem("sessionID");
+
+  return isloggedin ? (
     <div>
       <Title />
       <Container>
         <Wrapper>
-          <h2>Lets add some color to your profile</h2>
-          <ImageUploader />
+          <Form />
         </Wrapper>
       </Container>
       <Navbar />
     </div>
+  ) : (
+    <Redirect to={{ pathname: "/login" }} />
   );
 }
