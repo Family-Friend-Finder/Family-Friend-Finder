@@ -9,6 +9,8 @@ const cookieParser = require('cookie-parser');
 const User = require('./models/user.js');
 const apiRoutes = require('./routes/apiRoutes');
 const mongoose = require('mongoose');;
+const databaseUrl = "";
+const collections = [""];
 
 //Create Express application
 const app = express();
@@ -65,7 +67,9 @@ app.use(apiRoutes);
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+//mongoose fetch data functions
 
+//app listen port fuction
 app.listen(PORT, function () {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
