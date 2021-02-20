@@ -1,16 +1,19 @@
-import axios from "axios"; 
+import axios from "axios";
 
 export default {
-    // Gets all posts
-    isloggedin:  function() {
-      return axios.get("/api/isauthenticated");
-    },
+  // Gets all posts
+  isloggedin: function () {
+    return axios.get("/api/isauthenticated");
+  },
 
-    login: function(body) {
-      return axios.post("/api/login", body);
-    },
+  login: function (body) {
+    return axios.post("/api/login", body);
+  },
 
-    signup: function(body) {
-      return axios.post("/api/signup", body);
-    }
-}
+  signup: function (body) {
+    return axios.post("/api/signup", body);
+  },
+  match: function () {
+    return axios.get("/api/matches");
+  },
+};

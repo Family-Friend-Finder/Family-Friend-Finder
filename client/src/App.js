@@ -62,6 +62,9 @@ function App() {
           <Route path="/findfamilies">
             <ShowFamilies />
           </Route>
+          <Route path="/matches">
+            <Match />
+          </Route>
         </Switch>
       </BrowserRouter>
     </div>

@@ -62,7 +62,7 @@ export default function Signup() {
                               type="text"
                               placeholder="username"
                               value={username}
-                              onChange={e => setUsername(e.target.value)}
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </div>
                           <div className="form-group">
@@ -72,7 +72,7 @@ export default function Signup() {
                               type="password"
                               placeholder="password"
                               value={password}
-                              onChange={e => setPassword(e.target.value)}
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                           </div>
                           <button
@@ -97,10 +97,10 @@ export default function Signup() {
         <Navbar />
       </div>
     );
-    } else {
-      return <Redirect to={redirect} />
-    }
+  } else {
+    return <Redirect to={redirect} />;
   }
+}
 
 // class SignUp extends Component {
 //   constructor(props) {
