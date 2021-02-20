@@ -13,29 +13,40 @@ function Form() {
             <div className="card">
               <div className="card-body">
                 <form>
-                  <h2 className="title">Update Profile</h2>
+                  <h2 className="title">UpdateProfile</h2>
                   <hr />
                   <ImageUploader />
                   <div className="form-group">
                     <label for="InputName">Name</label>
                     <input
-                      type="text"
-                      placeholder="username"
-                      value={this.state.username}
-                      onChange={this.handleUsernameChange}
+                      type="name"
+                      className="form-control"
+                      id="InputName"
+                      placeholder="John Smith"
                     />
                   </div>
                   <div className="form-group">
-                    <label for="InputEmail">Password</label>
+                    <label for="InputEmail">Contact</label>
                     <input
-                      type="password"
-                      placeholder="password"
-                      value={this.state.password}
-                      onChange={this.handlePasswordChange}
+                      type="email"
+                      className="form-control"
+                      id="InputEmail"
+                      placeholder="425-856-6587"
                     />
                   </div>
+                  <div className="form-group">
+                    <label for="InputMessage">About Me</label>
+                    <textarea
+                      className="form-control"
+                      id="message"
+                      name="message"
+                      placeholder="I like to read, I like to code"
+                      rows="5"
+                    ></textarea>
+                  </div>
+
                   <button
-                    onClick={this.handleSubmit}
+                    // onClick={this.handleSubmit}
                     type="submit"
                     className="btn btn-info col-sm-4"
                   >

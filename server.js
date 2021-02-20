@@ -38,13 +38,13 @@ app.use(
   session({
     genid: function (req) {
       return uuidv4();
-
-  },
-  secret: 'SuperSecretKey',
-  resave:false,
-  saveUninitialized: true,
-  cookie: {maxAge: 60 * 60 * 1000} // 60 mins
-}));
+    },
+    secret: "SuperSecretKey",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }, // 60 mins
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());

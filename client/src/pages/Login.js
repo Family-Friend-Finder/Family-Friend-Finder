@@ -23,10 +23,11 @@ export default function Login(props) {
   });
 
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Username: ${username} Password: ${password}`);
-
     $.ajax({
       method: "POST",
       url: `/api/login`,
