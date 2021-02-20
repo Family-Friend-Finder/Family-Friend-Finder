@@ -6,21 +6,22 @@ import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import { Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/index";
-
+import AuthContext from "../utils/AuthContext"
 //import { AuthContext } from "../App";
 
-export default function Login() {
+export default function Login(props) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   //const [authStatus, setauthStatus] = useState();
   const [redirect, setRedirect] = useState(null);
 
-  //const { dispatch } = React.useContext(AuthContext);
+  const [loginState, setLoginState] = useState({
+    isloggedin: false,
+    newuser:'',
+    userid: '',
+    username: ''
+  });
 
-  // const [loginState, setLoginState] = useState({
-  //   isloggedin: false,
-  //   userid: "",
-  // });
 
 
 
@@ -37,13 +38,25 @@ export default function Login() {
     }).then(
       (res) => {
         console.log("res is ", res);
-        sessionStorage.setItem("sessionID",res);
-        // dispatch({
-        //   type: "LOGIN",
-        //   payload: { userid: res._id },
-        // });
-        //setauthStatus(true);
-        setRedirect("/findfamilies");
+        sessionStorage.setItem("sessionID", res._id);
+        if (props.newuser) {
+          setLoginState({...loginState,
+            isloggedin:true,
+            newuser:true,
+            userid: res._id,
+            username: res.username
+          });
+          setRedirect("/updateProfile");
+        }
+         else {
+          setLoginState({...loginState,
+            isloggedin:true,
+            newuser:false,
+            userid: res._id,
+            username: res.username
+          });
+          setRedirect("/findfamilies");
+         }
       },
       (err) => {
         console.log("oops!");
@@ -51,11 +64,9 @@ export default function Login() {
       }
     );
   };
-  //console.log(`Auth Status is ${authStatus}`);
-  //console.log(`${loginState}`);
 
   if (!redirect) {
-  return (
+    return (
       <div>
         <Title />
         <Container>
@@ -63,51 +74,53 @@ export default function Login() {
             <center>
               <div>
                 <div className="container">
-                  <div className="row" />
-                  <div className="col-sm-1"></div>
-                  <div className="col-sm-10">
-                    <h1>Welcome to Family Finder!</h1>
-                    <br />
-                    <div className="card">
-                      <div className="card-body">
-                        <form>
-                          <h2 className="title">Login</h2>
-                          <hr />
+                  <AuthContext.Provider value={loginState}>
+                    <div className="row" />
+                    <div className="col-sm-1"></div>
+                    <div className="col-sm-10">
+                      <h1>Welcome to Family Finder!</h1>
+                      <br />
+                      <div className="card">
+                        <div className="card-body">
+                          <form>
+                            <h2 className="title">Login</h2>
+                            <hr />
 
-                          <div className="form-group">
-                            <label for="InputName">Name</label>
-                            <br />
-                            <input
-                              type="text"
-                              placeholder="username"
-                              value={username}
-                              onChange={e => setUsername(e.target.value)}
-                            />
-                          </div>
-                          <div className="form-group">
-                            <label for="InputEmail">Password</label>
-                            <br />
-                            <input
-                              type="password"
-                              placeholder="password"
-                              value={password}
-                              onChange={e => setPassword(e.target.value)}
-                            />
-                          </div>
-                          <button
-                            onClick={handleSubmit}
-                            type="submit"
-                            className="btn btn-info"
-                          >
-                            Login
+                            <div className="form-group">
+                              <label for="InputName">Name</label>
+                              <br />
+                              <input
+                                type="text"
+                                placeholder="username"
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label for="InputEmail">Password</label>
+                              <br />
+                              <input
+                                type="password"
+                                placeholder="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                              />
+                            </div>
+                            <button
+                              onClick={handleSubmit}
+                              type="submit"
+                              className="btn btn-info"
+                            >
+                              Login
                           </button>
-                        </form>
+                          </form>
+                        </div>
                       </div>
+                      <Link role="button" to="signup">
+                        Sign-up
+                    </Link>
                     </div>
-                  </div>
-                  <Link role="button" to="signup">
-                    Sign-up
-                  </Link>
+                  </AuthContext.Provider>
                 </div>
               </div>
             </center>
@@ -115,8 +128,8 @@ export default function Login() {
         </Container>
         <Navbar />
       </div>
-  )
- } else {
-  return <Redirect to={redirect} />
+    )
+  } else {
+    return <Redirect to={redirect} />
   }
 }

@@ -12,5 +12,9 @@ export default {
 
     signup: function(body) {
       return axios.post("/api/signup", body);
+    },
+
+    allfamilies:function(body) {
+      return axios.get("/api/user", body);
     }
-}
+  }
