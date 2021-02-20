@@ -2,7 +2,7 @@ import db from "../models"
 
 app.post("/api/famlies",function(req,res){   
        
-    var mod = new model(req.body);  
+    const mod = new model(req.body);  
         mod.save(function(err,data){  
             if(err){  
                 res.send(err);                
