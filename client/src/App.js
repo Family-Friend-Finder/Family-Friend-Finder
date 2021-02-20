@@ -10,6 +10,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 
 function App() {
 
+
     return (
       <div className="App">
         <BrowserRouter>
@@ -21,10 +22,18 @@ function App() {
              <Signup />
             </Route> 
             <Route exact={true} path="/">
+
             <Login />
-            </Route>
-            <Route path="/updateProfile">
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route exact={true} path="/">
+            <Login />
+          </Route>
+          <Route path="/updateProfile">
             <UpdateProfile />
+
             </Route>
             <Route path="/findfamilies">
              <ShowFamilies />
