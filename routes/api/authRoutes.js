@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require("../models/user")
+const User = require("../../models/user")
 const passport = require("passport");
 
 
@@ -24,8 +24,8 @@ router.get('/api/isauthenticated', function (req, res) {
 });
 
 router.post('/api/login', passport.authenticate('local'), function (req, res) {
-  console.log(JSON.stringify(req.sessionID));
-  res.send(req.sessionID);
+  console.log(JSON.stringify(req.user));
+  res.send(req.user);
 });
 
 

@@ -6,6 +6,7 @@ import Container from "../components/Container/index";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import Wrapper from "../components/Wrapper";
+import Login from "./Login";
 
 export default function Signup() {
   const [username, setUsername] = useState();
@@ -13,6 +14,7 @@ export default function Signup() {
   const [redirect, setRedirect] = useState();
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
     console.log(`Username: ${username} Password: ${password}`);
 
@@ -26,6 +28,7 @@ export default function Signup() {
     }).then(
       (res) => {
         console.log("res is ", res);
+
         setRedirect("/login");
       },
       (err) => {
@@ -98,7 +101,7 @@ export default function Signup() {
       </div>
     );
     } else {
-      return <Redirect to={redirect} />
+      return (<Login newuser={true} />)
     }
   }
 
