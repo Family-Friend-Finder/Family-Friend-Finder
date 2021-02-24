@@ -3,6 +3,13 @@ import "../../index.css";
 import ImageUploader from "../ImageUploader/index";
 
 function Form() {
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+     
+    sessionStorage.removeItem("newuser");
+  }
+
   return (
     <center>
       <div>
@@ -46,7 +53,7 @@ function Form() {
                   </div>
 
                   <button
-                    // onClick={this.handleSubmit}
+                    onClick={handleSubmit}
                     type="submit"
                     className="btn btn-info col-sm-4"
                   >
