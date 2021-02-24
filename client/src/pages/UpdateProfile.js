@@ -5,23 +5,21 @@ import Title from "../components/Title/index";
 import { Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/index";
 import Form from "../components/Form/index";
-
+// import ImageUploader from "../components/ImageUploader/index";
 export default function UpdateProfile(props) {
   const isloggedin = sessionStorage.getItem("sessionID");
 
-  return (isloggedin ? 
-    (<div>
+  return isloggedin ? (
+    <div>
       <Title />
       <Container>
         <Wrapper>
-        <Form />
+          <Form />
         </Wrapper>
       </Container>
       <Navbar />
     </div>
-  )
-  :
-  (
+  ) : (
     <Redirect to={{ pathname: "/login" }} />
-  ));
+  );
 }
