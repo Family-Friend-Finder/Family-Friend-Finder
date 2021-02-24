@@ -6,24 +6,12 @@ import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import { Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/index";
-import AuthContext from "../utils/AuthContext"
-//import { AuthContext } from "../App";
 
 export default function Login(props) {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  //const [authStatus, setauthStatus] = useState();
   const [redirect, setRedirect] = useState(null);
-
-  const [loginState, setLoginState] = useState({
-    isloggedin: false,
-    newuser:'',
-    userid: '',
-    username: ''
-  });
-
-
-
+  const [errMsg, seterrMsg] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,31 +27,24 @@ export default function Login(props) {
       (res) => {
         console.log("res is ", res);
         sessionStorage.setItem("sessionID", res._id);
+ 
         if (props.newuser) {
-          setLoginState({...loginState,
-            isloggedin:true,
-            newuser:true,
-            userid: res._id,
-            username: res.username
-          });
           setRedirect("/updateProfile");
+          sessionStorage.setItem("newuser",props.newuser);
         }
          else {
-          setLoginState({...loginState,
-            isloggedin:true,
-            newuser:false,
-            userid: res._id,
-            username: res.username
-          });
           setRedirect("/findfamilies");
          }
       },
       (err) => {
         console.log("oops!");
         console.log(err);
+        seterrMsg("Incorrect Username or Password. Please try again");
       }
     );
   };
+
+
 
   if (!redirect) {
     return (
@@ -74,7 +55,6 @@ export default function Login(props) {
             <center>
               <div>
                 <div className="container">
-                  <AuthContext.Provider value={loginState}>
                     <div className="row" />
                     <div className="col-sm-1"></div>
                     <div className="col-sm-10">
@@ -114,13 +94,13 @@ export default function Login(props) {
                               Login
                           </button>
                           </form>
+                          <p className="errmsg">{errMsg}</p>
                         </div>
                       </div>
                       <Link role="button" to="signup">
                         Sign-up
                     </Link>
                     </div>
-                  </AuthContext.Provider>
                 </div>
               </div>
             </center>
@@ -130,6 +110,8 @@ export default function Login(props) {
       </div>
     )
   } else {
-    return <Redirect to={redirect} />
+    return (
+      <Redirect to={redirect} />
+    );
   }
 }

@@ -4,6 +4,7 @@ import ImageUploader from "../ImageUploader/index";
 import API from "../../utils/API";
 
 function Form() {
+
   const [firstName, setfirstName] = useState();
   const [lastName, setlastName] = useState();
   const [phoneNumber, setphoneNumber] = useState();
@@ -15,6 +16,7 @@ function Form() {
   // this will prevent default
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const userID = sessionStorage.getItem("sessionID");
     // console.log(`name: ${name} email: ${email} message: ${message}`);
     const userData = {
@@ -30,6 +32,7 @@ function Form() {
     API.updateProfile(userData, userID).then(
       (res) => {
         console.log("res is ", res);
+        sessionStorage.removeItem("newuser");
       },
       (err) => {
         console.log("oops!");
@@ -37,6 +40,9 @@ function Form() {
       }
     );
   };
+
+
+ 
   return (
     <center>
       <div>
@@ -120,7 +126,7 @@ function Form() {
                   </div>
 
                   <button
-                    // onClick={this.handleSubmit}
+                    onClick={handleSubmit}
                     type="submit"
                     className="btn btn-info col-sm-4"
                     onClick={handleSubmit}
