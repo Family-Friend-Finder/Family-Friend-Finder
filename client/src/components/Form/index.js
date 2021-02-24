@@ -4,7 +4,6 @@ import ImageUploader from "../ImageUploader/index";
 import API from "../../utils/API";
 
 function Form() {
-
   const [firstName, setfirstName] = useState();
   const [lastName, setlastName] = useState();
   const [phoneNumber, setphoneNumber] = useState();
@@ -16,7 +15,7 @@ function Form() {
   // this will prevent default
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const userID = sessionStorage.getItem("sessionID");
     // console.log(`name: ${name} email: ${email} message: ${message}`);
     const userData = {
@@ -41,8 +40,6 @@ function Form() {
     );
   };
 
-
- 
   return (
     <center>
       <div>
@@ -82,7 +79,6 @@ function Form() {
                       type="email"
                       className="form-control"
                       id="InputEmail"
-
                       placeholder="Enter Your Email"
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -95,7 +91,6 @@ function Form() {
                       id="InputPhone"
                       placeholder="Enter Your Phone"
                       onChange={(e) => setphoneNumber(e.target.value)}
-
                     />
                   </div>
                   <div className="form-group">
