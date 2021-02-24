@@ -20,9 +20,11 @@ class ImageUpload extends React.Component {
     let reader = new FileReader();
 
     reader.onloadend = () => {
+      console.log(reader.result);
       this.setState({
         picture: reader.result,
       });
+      this.props.imageUpdate(reader.result);
     };
 
     reader.readAsDataURL(pictureFiles[0]);
