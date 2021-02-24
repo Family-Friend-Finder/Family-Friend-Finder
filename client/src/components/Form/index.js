@@ -4,7 +4,6 @@ import API from "../../utils/API";
 import { Redirect } from "react-router-dom";
 
 function Form() {
-
   const [firstName, setfirstName] = useState();
   const [lastName, setlastName] = useState();
   const [phoneNumber, setphoneNumber] = useState();
@@ -16,6 +15,7 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
 
     const { files } = document.querySelector('input[type="file"]')
     const formData = new FormData();

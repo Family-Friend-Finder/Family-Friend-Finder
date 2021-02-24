@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardBtn from "../CardBtn";
+import "../CardBtn/style.css";
+import UserContext from "../../utils/userContext";
 
 function Card(props) {
+  const {
+    image,
+    firstName,
+    lastName,
+    familyDescription,
+    lovePets,
+  } = useContext(UserContext);
   return (
     <center>
       <div
@@ -14,23 +23,20 @@ function Card(props) {
           position: "relative",
         }}
       >
-        <img
-          src={"https://placeimg.com/200/200/people"}
-          className="card-img-top"
-          alt="..."
-        ></img>
+        <img src={image} className="card-img-top" alt="..."></img>
         <div className="card-body">
           <h5 className="card-title" style={{ textAlign: "center" }}>
-            Persons Name
+            {firstName} {lastName}
           </h5>
           <hr />
           <p className="card-text" style={{ textAlign: "center" }}>
-            Some jibber jabber about the person.
+            {familyDescription}
+            {lovePets}
           </p>
           <br />
           <br />
-          <CardBtn onClick={props.handleBtnClick} data-value="pass" />
-          <CardBtn onClick={props.handleBtnClick} data-value="pick" />
+          <CardBtn onClick={handleBtnClick} data-value="pass" />
+          <CardBtn onClick={handleBtnClick} data-value="pick" />
         </div>
       </div>
     </center>
