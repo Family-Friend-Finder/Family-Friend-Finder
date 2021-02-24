@@ -19,10 +19,11 @@ export default function ShowFamilies() {
     loadFamily();
   }, []);
   function loadFamily() {
-    API.allfamilies(family)
+    API.allfamilies()
       .then((families) => {
-        setFamilies(families);
-        setFamily(families[0]);
+        console.log(families);
+        setFamilies(families.data);
+        setFamily(families.data[1]);
       })
       .catch((err) => console.log(err));
   }
@@ -38,7 +39,7 @@ export default function ShowFamilies() {
   function handleBtnClick(event) {
     // Get the title of the clicked button
     const btnName = event.target.getAttribute("data-value");
-    if (btnName === "like" || btnName === "pass") {
+    if (btnName === "pick" || btnName === "pass") {
       const newFamilyIndex = familyIndex + 1;
       nextFamily(newFamilyIndex);
     }
@@ -46,8 +47,9 @@ export default function ShowFamilies() {
 
   if (isloggedin) {
     if (!newuser) {
+      console.log(family);
       return (
-        <UserContext.Provider value={{ family, families, handleBtnClick }}>
+        <UserContext.Provider value={{ ...family, handleBtnClick }}>
           <div>
             <Title />
             <Container>

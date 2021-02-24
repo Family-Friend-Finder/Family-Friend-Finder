@@ -5,11 +5,12 @@ import UserContext from "../../utils/userContext";
 
 function Card(props) {
   const {
-    image,
+    imageURL,
     firstName,
     lastName,
     familyDescription,
     lovePets,
+    handleBtnClick
   } = useContext(UserContext);
   return (
     <center>
@@ -23,7 +24,7 @@ function Card(props) {
           position: "relative",
         }}
       >
-        <img src={image} className="card-img-top" alt="..."></img>
+        <img src={imageURL} className="card-img-top" alt="..."></img>
         <div className="card-body">
           <h5 className="card-title" style={{ textAlign: "center" }}>
             {firstName} {lastName}

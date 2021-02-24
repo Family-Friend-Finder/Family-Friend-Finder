@@ -14,9 +14,8 @@ export default {
     return axios.post("/api/signup", body);
   },
 
-  allfamilies: function (body) {
-
-    return axios.get("/api/users", body);
+  allfamilies: function () {
+    return axios.get("/api/users");
   },
   removeMatch: function (id) {
     return axios.put("/api/users/", id);
