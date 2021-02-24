@@ -27,6 +27,7 @@ export default function Login(props) {
       (res) => {
         console.log("res is ", res);
         sessionStorage.setItem("sessionID", res._id);
+        seterrMsg("");
  
         if (props.newuser) {
           setRedirect("/updateProfile");
