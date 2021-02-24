@@ -82,6 +82,7 @@ function Form() {
                       type="email"
                       className="form-control"
                       id="InputEmail"
+
                       placeholder="Enter Your Email"
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -94,6 +95,7 @@ function Form() {
                       id="InputPhone"
                       placeholder="Enter Your Phone"
                       onChange={(e) => setphoneNumber(e.target.value)}
+
                     />
                   </div>
                   <div className="form-group">

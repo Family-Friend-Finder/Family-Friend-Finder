@@ -14,7 +14,6 @@ export default function Signup() {
   const [redirect, setRedirect] = useState();
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     console.log(`Username: ${username} Password: ${password}`);
 
@@ -29,7 +28,7 @@ export default function Signup() {
       (res) => {
         console.log("res is ", res);
 
-        setRedirect("/login");
+        setRedirect("/update");
       },
       (err) => {
         console.log("oops!");
@@ -65,7 +64,7 @@ export default function Signup() {
                               type="text"
                               placeholder="username"
                               value={username}
-                              onChange={e => setUsername(e.target.value)}
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </div>
                           <div className="form-group">
@@ -75,7 +74,7 @@ export default function Signup() {
                               type="password"
                               placeholder="password"
                               value={password}
-                              onChange={e => setPassword(e.target.value)}
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                           </div>
                           <button
@@ -100,10 +99,10 @@ export default function Signup() {
         <Navbar />
       </div>
     );
-    } else {
-      return (<Login newuser={true} />)
-    }
+  } else {
+    return <Login newuser={true} />;
   }
+}
 
 // class SignUp extends Component {
 //   constructor(props) {

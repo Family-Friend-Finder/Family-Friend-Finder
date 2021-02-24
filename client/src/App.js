@@ -5,24 +5,21 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ShowFamilies from "./pages/ShowFamilies";
 import UpdateProfile from "./pages/UpdateProfile";
-// import Match from "./pages/Matches";
+import Match from "./pages/Matches";
 //import ProtectedRoute from "./components/ProtectedRoute/index";
 
 function App() {
-
-
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route path="/login">
-             <Login />
-            </Route>
-            <Route path="/signup" >
-             <Signup />
-            </Route> 
-            <Route exact={true} path="/">
-
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route exact={true} path="/">
             <Login />
           </Route>
           <Route path="/signup">
@@ -33,16 +30,17 @@ function App() {
           </Route>
           <Route path="/updateProfile">
             <UpdateProfile />
-
-            </Route>
-            <Route path="/findfamilies">
-             <ShowFamilies />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </div>
-    );
-  }
-
+          </Route>
+          <Route path="/findfamilies">
+            <ShowFamilies />
+          </Route>
+          <Route path="/viewmatches">
+            <Match />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </div>
+  );
+}
 
 export default App;

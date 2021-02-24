@@ -15,10 +15,19 @@ export default {
   },
 
   allfamilies: function (body) {
+
     return axios.get("/api/users", body);
+  },
+  removeMatch: function (id) {
+    return axios.put("/api/users/", id);
+  },
+  getMatch: function (id) {
+    return axios.get("/api/users/" + id);
+
   },
 
   updateProfile: function (body, id) {
     return axios.put("/api/users/" + id, body);
+
   },
 };
