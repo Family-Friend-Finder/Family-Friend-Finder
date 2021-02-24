@@ -1,8 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../index.css";
 import ImageUploader from "../ImageUploader/index";
+import API from "../../utils/API";
 
 function Form() {
+
+  const [firstName, setfirstName] = useState();
+  const [lastName, setlastName] = useState();
+  const [phoneNumber, setphoneNumber] = useState();
+  const [familyDescription, setfamilyDescription] = useState();
+  const [email, setEmail] = useState();
+  const [lovePets, setlovePets] = useState();
+  const [imageUpdate, setimageUpdate] = useState();
+
+  // this will prevent default
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const userID = sessionStorage.getItem("sessionID");
+    // console.log(`name: ${name} email: ${email} message: ${message}`);
+    const userData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      familyDescription: familyDescription,
+      lovePets: lovePets,
+      imageUpdate: imageUpdate,
+    };
+
+    API.updateProfile(userData, userID).then(
+      (res) => {
+        console.log("res is ", res);
+        sessionStorage.removeItem("newuser");
+      },
+      (err) => {
+        console.log("oops!");
+        console.log(err);
+      }
+    );
+  };
+
+
+ 
   return (
     <center>
       <div>
@@ -15,40 +55,83 @@ function Form() {
                 <form>
                   <h2 className="title">UpdateProfile</h2>
                   <hr />
-                  <ImageUploader />
+                  <ImageUploader imageUpdate={setimageUpdate} />
                   <div className="form-group">
-                    <label for="InputName">Name</label>
+                    <label for="firstName">First Name</label>
                     <input
                       type="name"
                       className="form-control"
-                      id="InputName"
-                      placeholder="John Smith"
+                      id="firstName"
+                      placeholder="Enter First Name"
+                      onChange={(e) => setfirstName(e.target.value)}
                     />
                   </div>
                   <div className="form-group">
-                    <label for="InputEmail">Contact</label>
+                    <label for="lastName">Last Name</label>
+                    <input
+                      type="name"
+                      className="form-control"
+                      id="lastName"
+                      placeholder="Enter Last Name"
+                      onChange={(e) => setlastName(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label for="InputEmail">Email</label>
                     <input
                       type="email"
                       className="form-control"
                       id="InputEmail"
-                      placeholder="johnsmith@gmailcom"
+
+                      placeholder="Enter Your Email"
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="form-group">
-                    <label for="InputMessage">About Me</label>
+                    <label for="InputPhone">Phone</label>
+                    <input
+                      type="tel"
+                      className="form-control"
+                      id="InputPhone"
+                      placeholder="Enter Your Phone"
+                      onChange={(e) => setphoneNumber(e.target.value)}
+
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label for="description">Family Description</label>
                     <textarea
                       className="form-control"
-                      id="message"
-                      name="message"
+                      id="description"
+                      name="familyDescription"
                       placeholder="I like to read, I like to code"
                       rows="5"
+                      onChange={(e) => setfamilyDescription(e.target.value)}
                     ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label for="lovePets">Love Pets?</label>
+                    <input
+                      type="radio"
+                      value="true"
+                      name="lovepets"
+                      onChange={(e) => setlovePets(e.target.value)}
+                    />{" "}
+                    Yes
+                    <input
+                      type="radio"
+                      value="false"
+                      name="lovepets"
+                      onChange={(e) => setlovePets(e.target.value)}
+                    />{" "}
+                    No
                   </div>
 
                   <button
-                    // onClick={this.handleSubmit}
+                    onClick={handleSubmit}
                     type="submit"
                     className="btn btn-info col-sm-4"
+                    onClick={handleSubmit}
                   >
                     Submit
                   </button>

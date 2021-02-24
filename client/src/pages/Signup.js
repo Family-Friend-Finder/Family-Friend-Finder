@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery-ajax";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import Container from "../components/Container/index";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
