@@ -17,4 +17,10 @@ export default {
   allfamilies: function (body) {
     return axios.get("/api/user", body);
   },
+  removeMatch: function (id) {
+    return axios.put("/api/user", id);
+  },
+  getMatch: function (id) {
+    return axios.get("/api/user" + id);
+  },
 };

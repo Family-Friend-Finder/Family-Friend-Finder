@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ShowFamilies from "./pages/ShowFamilies";
 import UpdateProfile from "./pages/UpdateProfile";
-// import Match from "./pages/Matches";
+import Match from "./pages/Matches";
 //import ProtectedRoute from "./components/ProtectedRoute/index";
 
 function App() {
@@ -33,6 +33,9 @@ function App() {
           </Route>
           <Route path="/findfamilies">
             <ShowFamilies />
+          </Route>
+          <Route path="/viewmatches">
+            <Match />
           </Route>
         </Switch>
       </BrowserRouter>

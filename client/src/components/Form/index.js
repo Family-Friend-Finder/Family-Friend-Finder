@@ -31,7 +31,7 @@ function Form() {
                       type="email"
                       className="form-control"
                       id="InputEmail"
-                      placeholder="425-856-6587"
+                      placeholder="johnsmith@gmailcom"
                     />
                   </div>
                   <div className="form-group">

@@ -14,7 +14,6 @@ export default function Signup() {
   const [redirect, setRedirect] = useState();
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     console.log(`Username: ${username} Password: ${password}`);
 
@@ -29,7 +28,7 @@ export default function Signup() {
       (res) => {
         console.log("res is ", res);
 
-        setRedirect("/login");
+        setRedirect("/update");
       },
       (err) => {
         console.log("oops!");
@@ -100,9 +99,8 @@ export default function Signup() {
         <Navbar />
       </div>
     );
-    } else {
-      return (<Login newuser={true} />)
-    }
+  } else {
+    return <Login newuser={true} />;
   }
 }
 
