@@ -23,7 +23,7 @@ export default function ShowFamilies() {
       .then((families) => {
         console.log(families);
         setFamilies(families.data);
-        setFamily(families.data[1]);
+        setFamily(families.data[0]);
       })
       .catch((err) => console.log(err));
   }
@@ -39,7 +39,26 @@ export default function ShowFamilies() {
   function handleBtnClick(event) {
     // Get the title of the clicked button
     const btnName = event.target.getAttribute("data-value");
-    if (btnName === "pick" || btnName === "pass") {
+    if (btnName === "pass") {
+        const newFamilyIndex = familyIndex + 1;
+        nextFamily(newFamilyIndex);
+    } else 
+      if (btnName === "pick") {
+        const curruserID = sessionStorage.getItem("sessionID");
+        const body = { matchid: curruserID }
+        const likedfamilyID = family._id;
+
+        API.updateMatches(likedfamilyID, body).then((res) => 
+        {
+          console.log("res is ", res);
+          const newFamilyIndex = familyIndex + 1;
+          nextFamily(newFamilyIndex);
+        },
+        (err) => {
+          console.log("oops!");
+          console.log(err);
+        }
+      );
       const newFamilyIndex = familyIndex + 1;
       nextFamily(newFamilyIndex);
     }

@@ -3,18 +3,25 @@ import Container from "../components/Container/index.js";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import Wrapper from "../components/Wrapper/index";
-import Card from "../components/Card/index";
-import MatchBtn from "../components/MatchBtn/index";
+//import Card from "../components/Card/index";
+//import MatchBtn from "../components/MatchBtn/index";
+import MatchList from "../components/MatchList";
 import API from "../utils/API";
 
 function Match() {
   const [matches, setMatch] = useState([]);
+
   useEffect(() => {
-    loadMatch(matches);
+    const curUserID = sessionStorage.getItem("sessionID");
+    loadMatch(curUserID);
   }, []);
-  function loadMatch() {
-    API.getMatch(matches)
-      .then((res) => setMatch(res.data))
+
+  function loadMatch(id) {
+    API.getMatch(id)
+      .then((res) => {
+        console.log(res);
+        setMatch(res.data.matches)
+      })
       .catch((err) => console.log(err));
   }
 
@@ -24,26 +31,31 @@ function Match() {
       .catch((err) => console.log(err));
   }
 
+  // {/* {this.match.map((matches) => ( */}
+  //   <Card
+  //   id={matches.id}
+  //   familyDescription={matches.description}
+  //   firstName={matches.name}
+  //   image={matches.image}
+  // >
+  //   {/* This will need whatever function called we use to contact */}
+  //   <MatchBtn data-value="pick" />
+  //   <MatchBtn
+  //     onClick={() => removeMatch(matches.id)}
+  //     data-value="pass"
+  //   />
+  // </Card>
+  // {/* ))} */}
+
   return (
     <div>
       <Title />
       <Container>
         <Wrapper>
-          {/* {this.match.map((matches) => ( */}
-          <Card
-            id={matches.id}
-            familyDescription={matches.description}
-            firstName={matches.name}
-            image={matches.image}
-          >
-            {/* This will need whatever function called we use to contact */}
-            <MatchBtn data-value="pick" />
-            <MatchBtn
-              onClick={() => removeMatch(matches.id)}
-              data-value="pass"
-            />
-          </Card>
-          {/* ))} */}
+          <ul className="list-group mb-5">
+            {matches.map(item => (
+              <MatchList key={item._id} id={item._id} firstName={item.firstName} lastName={item.lastName} description={item.familyDescription} imageURL={item.imageURL} deleteFunc={removeMatch}/>))}
+          </ul>
         </Wrapper>
       </Container>
       <Navbar />
