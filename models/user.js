@@ -14,7 +14,7 @@ const User = new Schema({
   lovePets: Boolean,
   imageURL: String,
   img: {
-    data: Buffer,
+    // data: Buffer,
     contentType: String,
   },
   matches: [
