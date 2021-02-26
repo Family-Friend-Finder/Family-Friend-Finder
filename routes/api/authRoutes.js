@@ -7,6 +7,7 @@ router.post('/api/signup', function (req, res) {
   console.log(`${req.body.username} ${req.body.password}`);
   User.register(new User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
+      if (err) console.log(err);
       passport.authenticate('local')(req, res, function () {
         res.send(newUser);
       });

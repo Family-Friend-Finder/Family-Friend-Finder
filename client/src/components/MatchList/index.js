@@ -14,7 +14,7 @@ function MatchList(props) {
                     </div>
                 </div>
                 <div className="col-2 col-md-2 col-sm-2">
-                    <button className="btn-primary btn-md">View</button>
+                    <button className="btn-primary btn-md">Contact</button>
                     <button className="btn-primary btn-md mr-2" onClick={() => props.deleteFunc(props.id)}>Delete</button>
                 </div>
             </div>

@@ -17,8 +17,8 @@ export default {
   allfamilies: function () {
     return axios.get("/api/users");
   },
-  removeMatch: function (id) {
-    return axios.put("/api/users/removematch/", id);
+  removeMatch: function (id,body) {
+    return axios.put("/api/users/removematch/" + id, body);
   },
   getMatch: function (id) {
     return axios.get("/api/users/viewmatches/" + id);
