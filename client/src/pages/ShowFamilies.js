@@ -21,7 +21,7 @@ export default function ShowFamilies() {
   function loadFamily() {
     API.allfamilies()
       .then((families) => {
-        console.log(families);
+        //console.log(families);
         setFamilies(families.data);
         setFamily(families.data[0]);
       })
@@ -40,33 +40,38 @@ export default function ShowFamilies() {
     // Get the title of the clicked button
     const btnName = event.target.getAttribute("data-value");
     if (btnName === "pass") {
-        const newFamilyIndex = familyIndex + 1;
-        nextFamily(newFamilyIndex);
-    } else 
+      const newFamilyIndex = familyIndex + 1;
+      nextFamily(newFamilyIndex);
+    } else
       if (btnName === "pick") {
+         console.log("Inside Pick");
         const curruserID = sessionStorage.getItem("sessionID");
         const body = { matchid: curruserID }
         const likedfamilyID = family._id;
 
-        API.updateMatches(likedfamilyID, body).then((res) => 
-        {
-          console.log("res is ", res);
+        if (!(family.matches.includes(curruserID))) {
+          console.log("Family Match" + JSON.stringify(family.matches));
+
+          API.updateMatches(likedfamilyID, body).then((res) => {
+            console.log("res is ", res);
+            const newFamilyIndex = familyIndex + 1;
+            nextFamily(newFamilyIndex);
+          },
+            (err) => {
+              console.log("oops!");
+              console.log(err);
+            }
+          );
+        } else {
           const newFamilyIndex = familyIndex + 1;
           nextFamily(newFamilyIndex);
-        },
-        (err) => {
-          console.log("oops!");
-          console.log(err);
         }
-      );
-      const newFamilyIndex = familyIndex + 1;
-      nextFamily(newFamilyIndex);
-    }
+      }
   }
 
   if (isloggedin) {
     if (!newuser) {
-      console.log(family);
+      //console.log(family);
       return (
         <UserContext.Provider value={{ ...family, handleBtnClick }}>
           <div>

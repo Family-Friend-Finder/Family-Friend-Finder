@@ -36,7 +36,7 @@ module.exports = {
   updatematch: function(req, res) {
     db.User
       .findOneAndUpdate({ _id: req.params.id },
-        {$push: {matches:req.body.matchid}},
+        {$addToSet: {matches:req.body.matchid}},
         {new: true, useFindAndModify: false })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

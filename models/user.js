@@ -16,7 +16,7 @@ const User = new Schema({
   matches: [
     {
       type: Schema.Types.ObjectId,
-      ref: "userData",
+      ref: "userData"
     },
   ],
 });

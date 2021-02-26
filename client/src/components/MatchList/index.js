@@ -3,6 +3,7 @@ import React from "react";
 function MatchList(props) {
   console.log(props);
 
+
   return (
 
     <div
@@ -32,6 +33,7 @@ function MatchList(props) {
           >
             Delete
           </button>
+
         </div>
       </div>
       <div className="row">
