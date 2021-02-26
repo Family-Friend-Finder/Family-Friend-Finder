@@ -13,14 +13,10 @@ const User = new Schema({
   familyDescription: String,
   lovePets: Boolean,
   imageURL: String,
-  img: {
-    // data: Buffer,
-    contentType: String,
-  },
   matches: [
     {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "userData",
     },
   ],
 });

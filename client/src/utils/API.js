@@ -14,20 +14,20 @@ export default {
     return axios.post("/api/signup", body);
   },
 
-  allfamilies: function (body) {
-
-    return axios.get("/api/users", body);
+  allfamilies: function () {
+    return axios.get("/api/users");
   },
   removeMatch: function (id) {
-    return axios.put("/api/users/", id);
+    return axios.put("/api/users/removematch/", id);
   },
   getMatch: function (id) {
-    return axios.get("/api/users/" + id);
-
+    return axios.get("/api/users/viewmatches/" + id);
   },
-
   updateProfile: function (body, id) {
     return axios.put("/api/users/" + id, body);
-
   },
+  updateMatches: function(id, body) {
+    return axios.put("/api/users/addmatch/" + id, body);
+  },
+
 };

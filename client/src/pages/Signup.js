@@ -12,6 +12,7 @@ export default function Signup() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [redirect, setRedirect] = useState();
+  const [errMsg, seterrMsg] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,12 +28,13 @@ export default function Signup() {
     }).then(
       (res) => {
         console.log("res is ", res);
-
+        seterrMsg("");
         setRedirect("/update");
       },
       (err) => {
         console.log("oops!");
         console.log(err);
+        seterrMsg("Username already exists. Please use a different username");
       }
     );
   };
@@ -84,6 +86,7 @@ export default function Signup() {
                           >
                             Sign-up
                           </button>
+                          <p className="errmsg">{errMsg}</p>
                         </form>
                       </div>
                     </div>
