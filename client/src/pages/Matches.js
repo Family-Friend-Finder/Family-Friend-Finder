@@ -1,47 +1,51 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../components/Container/index.js";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import Wrapper from "../components/Wrapper/index";
-import Card from "../components/Card/index";
-import MatchBtn from "../components/MatchBtn/index";
+import MatchList from "../components/MatchList";
+import API from "../utils/API";
 
-class Match extends Component {
-  // Setting this.state.friends to the friends json array
-  state = {
-    match,
-  };
-  removeMatch = (id) => {
-    const match = this.state.match.filter((match) => match.id !== id);
+function Match() {
+  const [matches, setMatch] = useState([]);
 
-    this.setState({ match });
-  };
-  render() {
-    return (
-      <div>
-        <Title />
-        <Container>
-          <Wrapper>
-            {this.state.friends.map((friend) => (
-              <Card
-                id={match.id}
-                key={match.id}
-                name={match.name}
-                image={match.image}
-              >
-                <MatchBtn
-                  onClick={props.removeMatch(props.id)}
-                  data-value="pass"
-                />
-                {/* This will need whatever function called we use to contact */}
-                <MatchBtn onClick={props.handleBtnClick} data-value="pick" />
-              </Card>
-            ))}
-          </Wrapper>
-        </Container>
-        <Navbar />
-      </div>
-    );
+  useEffect(() => {
+    const curUserID = sessionStorage.getItem("sessionID");
+    loadMatch(curUserID);
+  }, []);
+
+  function loadMatch(id) {
+    API.getMatch(id)
+      .then((res) => {
+        console.log(res);
+        setMatch(res.data.matches)
+      })
+      .catch((err) => console.log(err));
   }
+
+  function removeMatch(id) {
+    const curruserID = sessionStorage.getItem("sessionID");
+        const body = { matchid: id }
+        console.log(curruserID);
+    API.removeMatch(curruserID,body)
+      .then((res) => loadMatch(curruserID))
+      .catch((err) => console.log(err));
+  }
+
+
+  return (
+    <div>
+      <Title />
+      <Container>
+        <Wrapper>
+          <ul className="list-group mb-5">
+            {matches.map(item => (
+              <MatchList key={item._id} id={item._id} firstName={item.firstName} lastName={item.lastName} description={item.familyDescription} imageURL={item.imageURL} deleteFunc={removeMatch}/>))}
+          </ul>
+        </Wrapper>
+      </Container>
+      <Navbar />
+    </div>
+  );
 }
 export default Match;

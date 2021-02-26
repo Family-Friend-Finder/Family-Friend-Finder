@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import $ from "jquery-ajax";
 import { Redirect } from "react-router-dom";
 // import { Link, useLocation } from "react-router-dom";
@@ -18,7 +18,6 @@ const styles = {
 };
 
 function Navbar(props) {
-
   const [redirect, setRedirect] = useState(null);
 
   const handleLogout = (e) => {
@@ -26,73 +25,78 @@ function Navbar(props) {
 
     $.ajax({
       method: "GET",
-      url: `/api/logout`
+      url: `/api/logout`,
     }).then(
       (res) => {
         console.log("res is ", res);
         sessionStorage.removeItem("sessionID");
-        setRedirect("/login")
+        setRedirect("/login");
       },
       (err) => {
         console.log("oops!");
         console.log(err);
       }
     );
-  }
+  };
 
   if (!redirect) {
-  return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark"
-      style={styles.footer}
-    >
-      <div className="container">
-        <a className="navbar-brand" style={styles.font}>
-          Family Friend Finder
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarTogglerDemo01"
-          aria-controls="navbarTogglerDemo01"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul
-            className="nav justify-content-end navbar-nav ml-auto mt-2 mt-lg-0"
-            style={styles.font}
+    return (
+      <nav
+        className="navbar navbar-expand-lg navbar-dark bg-dark"
+        style={styles.footer}
+      >
+        <div className="container">
+          <a className="navbar-brand" style={styles.font} href="/login">
+            Family Friend Finder
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-            <li className="nav-item ">
-              <a className="nav-link" href="/findfamilies">
-                Find a Family{" "}
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/viewmatches">
-                Matches{" "}
-              </a>
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link " href="/updateProfile">
-                Profile
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#" style={styles.logout} onClick={handleLogout}>
-                Logout{"  "} <i className="fas fa-sign-out-alt"></i>
-              </a>
-            </li>
-          </ul>
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul
+              className="nav justify-content-end navbar-nav ml-auto mt-2 mt-lg-0"
+              style={styles.font}
+            >
+              <li className="nav-item ">
+                <a className="nav-link" href="/findfamilies">
+                  Find a Family{" "}
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/viewmatches">
+                  Friends{" "}
+                </a>
+              </li>
+              <li className="nav-item active">
+                <a className="nav-link " href="/updateProfile">
+                  Profile
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="/login"
+                  style={styles.logout}
+                  onClick={handleLogout}
+                >
+                  Logout{"  "} <i className="fas fa-sign-out-alt"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-  );
+      </nav>
+    );
   } else {
-    return <Redirect to={redirect} />
+    return <Redirect to={redirect} />;
   }
 }
 

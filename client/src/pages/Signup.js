@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery-ajax";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import Container from "../components/Container/index";
 import Navbar from "../components/Navbar/index";
 import Title from "../components/Title/index";
 import Wrapper from "../components/Wrapper";
+import Login from "./Login";
 
 export default function Signup() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [redirect, setRedirect] = useState();
+  const [errMsg, seterrMsg] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,11 +28,13 @@ export default function Signup() {
     }).then(
       (res) => {
         console.log("res is ", res);
-        setRedirect("/login");
+        seterrMsg("");
+        setRedirect("/update");
       },
       (err) => {
         console.log("oops!");
         console.log(err);
+        seterrMsg("Username already exists. Please use a different username");
       }
     );
   };
@@ -62,7 +66,7 @@ export default function Signup() {
                               type="text"
                               placeholder="username"
                               value={username}
-                              onChange={e => setUsername(e.target.value)}
+                              onChange={(e) => setUsername(e.target.value)}
                             />
                           </div>
                           <div className="form-group">
@@ -72,7 +76,7 @@ export default function Signup() {
                               type="password"
                               placeholder="password"
                               value={password}
-                              onChange={e => setPassword(e.target.value)}
+                              onChange={(e) => setPassword(e.target.value)}
                             />
                           </div>
                           <button
@@ -82,6 +86,7 @@ export default function Signup() {
                           >
                             Sign-up
                           </button>
+                          <p className="errmsg">{errMsg}</p>
                         </form>
                       </div>
                     </div>
@@ -97,10 +102,10 @@ export default function Signup() {
         <Navbar />
       </div>
     );
-    } else {
-      return <Redirect to={redirect} />
-    }
+  } else {
+    return <Login newuser={true} />;
   }
+}
 
 // class SignUp extends Component {
 //   constructor(props) {

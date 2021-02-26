@@ -3,3 +3,43 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.errmsg {
+  color: red;
+}
+.contactBtn {
+  background-color: rgb(5, 151, 73);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 15px 10px 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+.contactBtn:hover {
+  background-color: #ffffff;
+  color: rgb(5, 151, 73);
+  border-style: solid;
+  border-color: rgb(5, 151, 73);
+}
+
+.deleteBtn {
+  background-color: rgb(236, 65, 65);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 15px 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+.deleteBtn:hover {
+  background-color: #ffffff;
+  color: rgb(236, 65, 65);
+  border-style: solid;
+  border-style: rgb(236, 65, 65);
+}

@@ -7,7 +7,8 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const User = require("./models/user.js");
-const apiRoutes = require("./routes/apiRoutes");
+const apiRoutes = require("./routes/api/authRoutes");
+const userRoutes = require("./routes/api");
 const mongoose = require("mongoose");
 
 //Create Express application
@@ -24,12 +25,14 @@ mongoose.connect(
 );
 
 //to config API to use body body-parser and look for JSON in req.body
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
-app.use(bodyParser.json());
+// app.use(
+//   bodyParser.urlencoded({
+//     extended: false,
+//   })
+// );
+// app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "10mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 app.use(cookieParser());
 
@@ -62,6 +65,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(apiRoutes);
+app.use(userRoutes);
 
 // Send every request to the React app
 // Define any API routes before this runs
