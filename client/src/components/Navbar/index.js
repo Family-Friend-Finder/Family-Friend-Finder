@@ -72,7 +72,7 @@ function Navbar(props) {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/viewmatches">
-                  Matches{" "}
+                  Friends{" "}
                 </a>
               </li>
               <li className="nav-item active">

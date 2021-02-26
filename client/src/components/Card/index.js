@@ -10,7 +10,7 @@ function Card(props) {
     lastName,
     familyDescription,
     lovePets,
-    handleBtnClick
+    handleBtnClick,
   } = useContext(UserContext);
   return (
     <center>
@@ -22,22 +22,25 @@ function Card(props) {
           marginBottom: 100,
           background: "lightgrey",
           position: "relative",
+          fontFamily: "Ranchers",
         }}
       >
-        <img src={imageURL} className="card-img-top" alt="..."></img>
         <div className="card-body">
-          <h5 className="card-title" style={{ textAlign: "center" }}>
-            {firstName} {lastName}
-          </h5>
-          <hr />
-          <p className="card-text" style={{ textAlign: "center" }}>
-            {familyDescription}
-            {lovePets}
-          </p>
-          <br />
-          <br />
-          <CardBtn onClick={handleBtnClick} data-value="pass" />
-          <CardBtn onClick={handleBtnClick} data-value="pick" />
+          <img src={imageURL} className="card-img-top" alt="..."></img>
+          <div className="card-body">
+            <h5 className="card-title" style={{ textAlign: "center" }}>
+              {firstName} {lastName}
+            </h5>
+            <hr />
+            <p className="card-text" style={{ textAlign: "center" }}>
+              {familyDescription}
+              {lovePets}
+            </p>
+            <br />
+            <br />
+            <CardBtn onClick={handleBtnClick} data-value="pass" />
+            <CardBtn onClick={handleBtnClick} data-value="pick" />
+          </div>
         </div>
       </div>
     </center>

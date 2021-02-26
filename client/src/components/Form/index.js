@@ -16,20 +16,22 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
-    const { files } = document.querySelector('input[type="file"]')
+    const { files } = document.querySelector('input[type="file"]');
     const formData = new FormData();
-    formData.append('file', files[0]);
+    formData.append("file", files[0]);
     // replace this with your upload preset name
-    formData.append('upload_preset', 'pgbhha9v');
+    formData.append("upload_preset", "pgbhha9v");
     const options = {
-      method: 'POST',
+      method: "POST",
       body: formData,
     };
 
-    return fetch('https://api.Cloudinary.com/v1_1/deavhcfeh/image/upload', options)
-      .then(res => res.json())
-      .then(res => {
+    return fetch(
+      "https://api.Cloudinary.com/v1_1/deavhcfeh/image/upload",
+      options
+    )
+      .then((res) => res.json())
+      .then((res) => {
         console.log(res);
 
         const userID = sessionStorage.getItem("sessionID");
@@ -41,7 +43,7 @@ function Form() {
           phoneNumber: phoneNumber,
           familyDescription: familyDescription,
           lovePets: lovePets,
-          imageURL: res.secure_url
+          imageURL: res.secure_url,
         };
 
         API.updateProfile(userData, userID).then(
@@ -58,13 +60,11 @@ function Form() {
           }
         );
       })
-      .catch(err => {
+      .catch((err) => {
         seterrMsg("Image Upload Failed :(. Please try again.");
-        console.log(err)
+        console.log(err);
       });
-
-  }
-
+  };
 
   if (!redirect) {
     return (
@@ -75,95 +75,122 @@ function Form() {
             <div className="col-sm-1"></div>
             <div className="col-sm-10">
               <div className="card">
-                <div className="card-body">
+                <div
+                  className="card-body"
+                  style={{
+                    fontFamily: "Ranchers",
+                    backgroundColor: "#b2d7fb",
+                    border: "solid",
+                  }}
+                >
                   <form>
-                    <h2 className="title">UpdateProfile</h2>
+                    <h1 className="title"> Update Profile </h1>
                     <hr />
                     {/*<ImageUploader imageUpdate={setimageUpdate} />*/}
                     <div className="form-group">
-                      <label for="firstName">Choose Profile Picture</label>
-                      <input type="file" id="profilePic" />
+                      <label for="firstName">
+                        <strong>Choose Profile Picture</strong>
+                        <hr />
+                      </label>
+                      <br />
+                      <i class="fas fa-file-upload">
+                        {" "}
+                        <input type="file" id="profilePic" />
+                        <hr />
+                      </i>
+
                       {/* <button type="button" className="btn" onClick={handleImageUpload}>Upload</button> */}
                     </div>
-
+                    <br />
                     <div className="form-group">
-                      <label for="firstName">First Name</label>
+                      {/* <label for="firstName"> First Name </label> */}
                       <input
                         type="name"
                         className="form-control"
                         id="firstName"
                         placeholder="Enter First Name"
                         onChange={(e) => setfirstName(e.target.value)}
+                        style={{ border: "solid" }}
                       />
                     </div>
                     <div className="form-group">
-                      <label for="lastName">Last Name</label>
+                      {/* <label for="lastName"> Last Name </label> */}
                       <input
                         type="name"
                         className="form-control"
                         id="lastName"
                         placeholder="Enter Last Name"
                         onChange={(e) => setlastName(e.target.value)}
+                        style={{ border: "solid" }}
                       />
                     </div>
                     <div className="form-group">
-                      <label for="InputEmail">Email</label>
+                      {/* <label for="InputEmail">Email</label> */}
                       <input
                         type="email"
                         className="form-control"
                         id="InputEmail"
-
                         placeholder="Enter Your Email"
                         onChange={(e) => setEmail(e.target.value)}
+                        style={{ border: "solid" }}
                       />
                     </div>
                     <div className="form-group">
-                      <label for="InputPhone">Phone</label>
+                      {/* <label for="InputPhone">Phone</label> */}
                       <input
                         type="tel"
                         className="form-control"
                         id="InputPhone"
                         placeholder="Enter Your Phone"
                         onChange={(e) => setphoneNumber(e.target.value)}
-
+                        style={{ border: "solid" }}
                       />
                     </div>
                     <div className="form-group">
-                      <label for="description">Family Description</label>
+                      {/* <label for="description"> Family Description </label> */}
                       <textarea
                         className="form-control"
                         id="description"
                         name="familyDescription"
-                        placeholder="I like to read, I like to code"
+                        placeholder="Enter a description about your family and interests"
                         rows="5"
                         onChange={(e) => setfamilyDescription(e.target.value)}
+                        style={{ border: "solid" }}
                       ></textarea>
                     </div>
                     <div className="form-group">
                       <label for="lovePets">Love Pets?</label>
+                      <br />
                       <input
                         type="radio"
                         value="true"
                         name="lovepets"
                         onChange={(e) => setlovePets(e.target.value)}
-                      />
-                    Yes
-                    <input
+                      />{" "}
+                      <i class="fas fa-heart"> yes </i>
+                      <br />
+                      <input
                         type="radio"
                         value="false"
                         name="lovepets"
                         onChange={(e) => setlovePets(e.target.value)}
-                      />
-                    No
-                  </div>
+                        style={{ border: "solid" }}
+                      />{" "}
+                      <i class="fas fa-thumbs-down"> no </i>
+                    </div>
 
                     <button
                       type="submit"
                       className="btn btn-info col-sm-4"
                       onClick={handleSubmit}
+                      style={{
+                        border: "solid",
+                        borderColor: "black",
+                        backgroundColor: "#47a8ce",
+                      }}
                     >
                       Submit
-                  </button>
+                    </button>
                     <p className="errmsg">{errMsg}</p>
                   </form>
                 </div>
@@ -174,7 +201,7 @@ function Form() {
       </center>
     );
   } else {
-    return <Redirect to={redirect} />
+    return <Redirect to={redirect} />;
   }
 }
 
