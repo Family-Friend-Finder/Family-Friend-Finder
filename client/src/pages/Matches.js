@@ -18,20 +18,19 @@ function Match() {
     API.getMatch(id)
       .then((res) => {
         console.log(res);
-        setMatch(res.data.matches)
+        setMatch(res.data.matches);
       })
       .catch((err) => console.log(err));
   }
 
   function removeMatch(id) {
     const curruserID = sessionStorage.getItem("sessionID");
-        const body = { matchid: id }
-        console.log(curruserID);
-    API.removeMatch(curruserID,body)
+    const body = { matchid: id };
+    console.log(curruserID);
+    API.removeMatch(curruserID, body)
       .then((res) => loadMatch(curruserID))
       .catch((err) => console.log(err));
   }
-
 
   return (
     <div>
@@ -39,8 +38,19 @@ function Match() {
       <Container>
         <Wrapper>
           <ul className="list-group mb-5">
-            {matches.map(item => (
-              <MatchList key={item._id} id={item._id} firstName={item.firstName} lastName={item.lastName} description={item.familyDescription} imageURL={item.imageURL} phoneNumber={item.phoneNumber} email={item.email} deleteFunc={removeMatch}/>))}
+            {matches.map((item) => (
+              <MatchList
+                key={item._id}
+                id={item._id}
+                firstName={item.firstName}
+                lastName={item.lastName}
+                description={item.familyDescription}
+                imageURL={item.imageURL}
+                deleteFunc={removeMatch}
+                phoneNumber={item.phoneNumber}
+                email={item.email}
+              />
+            ))}
           </ul>
         </Wrapper>
       </Container>
