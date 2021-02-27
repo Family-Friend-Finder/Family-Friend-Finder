@@ -40,7 +40,7 @@ function Match() {
         <Wrapper>
           <ul className="list-group mb-5">
             {matches.map(item => (
-              <MatchList key={item._id} id={item._id} firstName={item.firstName} lastName={item.lastName} description={item.familyDescription} imageURL={item.imageURL} deleteFunc={removeMatch}/>))}
+              <MatchList key={item._id} id={item._id} firstName={item.firstName} lastName={item.lastName} description={item.familyDescription} imageURL={item.imageURL} phoneNumber={item.phoneNumber} email={item.email} deleteFunc={removeMatch}/>))}
           </ul>
         </Wrapper>
       </Container>
