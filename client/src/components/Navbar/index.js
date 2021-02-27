@@ -75,7 +75,7 @@ function Navbar(props) {
                   Friends{" "}
                 </a>
               </li>
-              <li className="nav-item active">
+              <li className="nav-item">
                 <a className="nav-link " href="/updateProfile">
                   Profile
                 </a>

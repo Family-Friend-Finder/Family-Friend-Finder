@@ -12,7 +12,9 @@ function Card(props) {
     lovePets,
     handleBtnClick,
   } = useContext(UserContext);
-  return (
+
+  return (    
+   
     <center>
       <div
         className="card"
@@ -25,6 +27,7 @@ function Card(props) {
           fontFamily: "Ranchers",
         }}
       >
+       
         <div className="card-body">
           <img src={imageURL} className="card-img-top" alt="..."></img>
           <div className="card-body">
@@ -33,8 +36,8 @@ function Card(props) {
             </h5>
             <hr />
             <p className="card-text" style={{ textAlign: "center" }}>
-              {familyDescription}
-              {lovePets}
+              {familyDescription} <br /> <br />
+              {lovePets?'We are Pet Lovers!!':"Sorry! We are allergic to pets :("}
             </p>
             <br />
             <br />
