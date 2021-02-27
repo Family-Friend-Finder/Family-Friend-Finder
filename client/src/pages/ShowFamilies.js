@@ -18,12 +18,13 @@ export default function ShowFamilies() {
   useEffect(() => {
     loadFamily();
   }, []);
+
   function loadFamily() {
     API.allfamilies()
       .then((families) => {
-        //console.log(families);
-        setFamilies(families.data);
-        setFamily(families.data[0]);
+        const updatedFamilies = families.data.filter(fam => (fam._id !== isloggedin));
+        setFamilies(updatedFamilies);
+        setFamily(updatedFamilies[0]);
       })
       .catch((err) => console.log(err));
   }
@@ -49,9 +50,6 @@ export default function ShowFamilies() {
         const body = { matchid: curruserID }
         const likedfamilyID = family._id;
 
-        if (!(family.matches.includes(curruserID))) {
-          console.log("Family Match" + JSON.stringify(family.matches));
-
           API.updateMatches(likedfamilyID, body).then((res) => {
             console.log("res is ", res);
             const newFamilyIndex = familyIndex + 1;
@@ -62,16 +60,11 @@ export default function ShowFamilies() {
               console.log(err);
             }
           );
-        } else {
-          const newFamilyIndex = familyIndex + 1;
-          nextFamily(newFamilyIndex);
-        }
       }
   }
 
   if (isloggedin) {
     if (!newuser) {
-      //console.log(family);
       return (
         <UserContext.Provider value={{ ...family, handleBtnClick }}>
           <div>
