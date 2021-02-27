@@ -43,3 +43,8 @@ body {
   border-style: solid;
   border-style: rgb(236, 65, 65);
 }
+
+.btnimg {
+  background-color: blue;
+  font-size: 1.25rem;
+}
